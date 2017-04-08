@@ -1,4 +1,3 @@
-# Book_Sharing_System
-this platform is used to share books 
-
-this project is under devalopment
+# Book Sharing Platform
+A book sharing portal built in Flask with MySQL database. 
+`CS F212 Project`
