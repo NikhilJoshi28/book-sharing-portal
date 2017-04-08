@@ -2,11 +2,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Flask test Project</title>
+        <title>Book Share</title>
          <meta content="width=device-width,initial-scale=1" name=viewport>
         <link href=../assets/css/docs.min.css rel=stylesheet>
         <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-        <link rel="shortcut Icon" href="{{ url_for('static',filename='Images/ic_call_missed_black_24dp_2x.png') }}">
+        <link rel="shortcut Icon" href="{{ url_for('static',filename='Images/ic_shuffle_black_24dp.png') }}">
     </head>
 
 <header>
@@ -40,13 +40,13 @@
               <div class="modal-body">
 
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Handel/BITS Id</span>
-                      <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Handle/BITS Id</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2">
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Password</span>
-                      <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Password</span>
+                      <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
                   </div>
               </div>
               <a href="/GuestLogin/">
@@ -75,38 +75,38 @@
               <div class="modal-body">
 
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">BITS Id *</span>
-                      <input type="text" class="form-control" placeholder="BITS Id" aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">BITS Id *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="BITS Id" aria-describedby="sizing-addon2">
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Password *</span>
-                      <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Password *</span>
+                      <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Confirm Password *</span>
-                      <input type="password" class="form-control" placeholder="Confirm Password" aria-describedby="sizing-addon2" >
+                      <span style="float:center; width:150px" style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Confirm Password *</span>
+                      <input style="width:400px" type="password" class="form-control" placeholder="Confirm Password" aria-describedby="sizing-addon2" >
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Name *</span>
-                      <input type="text" class="form-control" placeholder="Name" aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Name *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Name" aria-describedby="sizing-addon2">
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Phone Number *</span>
-                      <input type="text" class="form-control" placeholder="Phone No." aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Phone Number *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Phone No." aria-describedby="sizing-addon2">
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Room Number *</span>
-                      <input type="text" class="form-control" placeholder="Room No." aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Room Number *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Room No." aria-describedby="sizing-addon2">
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span class="input-group-addon" id="sizing-addon2">Facebook id*</span>
-                      <input type="text" class="form-control" placeholder="FB id (optional)" aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Facebook id*</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="FB id (optional)" aria-describedby="sizing-addon2">
                   </div>
                     <label></label>
               </div>
@@ -123,7 +123,7 @@
 </header>
 
 
-<body>
+<body background="">
     <form>
       <div class="form-group" style="margin-right:1000px">
         <label style="margin-top:250px; margin-left:-200px" for="exampleInputEmail1">BITS Id</label>
@@ -133,7 +133,7 @@
         <label style="margin-left:70px" for="exampleInputPassword1">Password</label>
         <input style="margin-left:70px" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-        <a href="/dashboard/">
+        <a href="/templates/Dashboard.html">
             <button style="margin-left:180px" type="button" class="btn btn-danger">Login</button>
         </a>
     </form>
