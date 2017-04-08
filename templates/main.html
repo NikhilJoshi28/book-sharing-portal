@@ -119,10 +119,24 @@
           </div>
         </div>
     </ul>
+
 </header>
 
 
 <body>
+    <form>
+      <div class="form-group" style="margin-right:1000px">
+        <label style="margin-top:250px; margin-left:-200px" for="exampleInputEmail1">BITS Id</label>
+        <input style="margin-left:70px" type="email" class="form-control" id="exampleInputEmail1" placeholder="BITS Id">
+      </div>
+      <div class="form-group" style="margin-right:1000px">
+        <label style="margin-left:70px" for="exampleInputPassword1">Password</label>
+        <input style="margin-left:70px" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+        <a href="/dashboard/">
+            <button style="margin-left:180px" type="button" class="btn btn-danger">Login</button>
+        </a>
+    </form>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
 </body>
