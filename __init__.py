@@ -1,11 +1,24 @@
 from flask import Flask,render_template
-
+import bookApp
 app = Flask(__name__)
-
 
 @app.route('/')
 def hello_world():
+    db.hello();
     return render_template("main.html")
+
+@app.route('/login')
+def login():
+    #add login functionality to database
+    if(True):
+        return render_template("dashboard.html")
+    #else:
+        #promt error on login form
+
+@app.route('/signup')
+def signup():
+    print("Signing up")
+    #signup function
 
 
 if __name__ == '__main__':
