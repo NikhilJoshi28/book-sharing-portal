@@ -7,11 +7,13 @@ def hello_world():
     db.hello();
     return render_template("main.html")
 
-@app.route('/login')
-def login():
+#@app.route('dash-board/')
+@app.route('/dashboard/')
+def dashboard():
+    #return ("hello dashboard")
     #add login functionality to database
     if(True):
-        return render_template("dashboard.html")
+       return render_template("dashboard.html")
     #else:
         #promt error on login form
 

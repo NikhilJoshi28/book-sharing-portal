@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Dashboard</title>
+         <meta content="width=device-width,initial-scale=1" name=viewport>
+        <link href=../assets/css/docs.min.css rel=stylesheet>
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+        <link rel="shortcut Icon" href="{{ url_for('static',filename='Images/ic_shuffle_black_24dp.png') }}">
+    </head>
+</head>
+<header>
+     <div class="navbar-header">
+         <a class="navbar-brand" href="/">
+              <img style="max-width:120px; margin-top:-7px;" src="{{ url_for('static',filename='Images/Logo2.jpeg') }}">
+         </a>
+     </div>
+
+    <ul class="nav navbar-nav navbar-right">
+        <!-- Button trigger modal -->
+        <a href="/">
+            <button style="margin-top:20px; margin-right:40px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                Logout
+            </button>
+        </a>
+    </ul>
+
+</header>
+<body>
+    <div class="border-row" style="width=100%;margin-buttom:20px"></div>
+    <div class="container-fluid" align="center" style="min-height:100%;">
+        {% block body %} {% endblock %}
+
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
