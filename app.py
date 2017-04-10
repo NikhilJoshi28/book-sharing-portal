@@ -1,16 +1,19 @@
 from flask import Flask,render_template
-from scripts import db
+from scripts import dbconnect
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    db.hello();
+def index():
+    dbconnect.hello();
     return render_template("main.html")
+
+@app.route('/login/')
+def login_page():
+    return render_template("login.html")
 
 #@app.route('dash-board/')
 @app.route('/dashboard/')
 def dashboard():
-    #return ("hello dashboard")
     #add login functionality to database
     if(True):
        return render_template("dashboard.html")
