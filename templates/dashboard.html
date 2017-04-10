@@ -14,21 +14,28 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist" style="margin-right:50px">
     <li role="presentation" class="active">
-        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+        <a href="#search" aria-controls="search" role="tab" data-toggle="tab">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             Search
         </a>
     </li>
     <li role="presentation">
-        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+        <a href="#bookshare" aria-controls="bookshare" role="tab" data-toggle="tab">
             <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
             Books Shared
         </a>
     </li>
     <li role="presentation">
-        <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+        <a href="#increq" aria-controls="increq" role="tab" data-toggle="tab">
             <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
             Incoming Request
+        </a>
+    </li>
+
+    <li role="presentation">
+        <a href="#sentreq" aria-controls="sentreq" role="tab" data-toggle="tab">
+            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+            Sent Request
         </a>
     </li>
     <li role="presentation">
@@ -41,10 +48,103 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
-  <div role="tabpanel" class="tab-pane fade in active" id="home">a..</div>
-  <div role="tabpanel" class="tab-pane fade" id="profile">b..</div>
-  <div role="tabpanel" class="tab-pane fade" id="messages">c..</div>
-  <div role="tabpanel" class="tab-pane fade" id="settings">d..</div>
+  <div role="tabpanel" class="tab-pane fade in active" id="search">a..</div>
+
+  <div role="tabpanel" class="tab-pane fade" id="bookshare">b..</div>
+
+  <div role="tabpanel" class="tab-pane fade" id="increq">c..</div>
+
+  <div role="tabpanel" class="tab-pane fade" id="sentreq">c..</div>
+
+  <div role="tabpanel" class="tab-pane fade" id="settings" align="center">
+     <button style="margin-top:60px; width:250px;" data-toggle="modal" data-target="#changePass" type="button" class="btn btn-warning">
+         Change Password
+     </button>
+
+    <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header" align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Old Password</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="old password" aria-describedby="sizing-addon2">
+                  </div>
+                  <label></label>
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">New Password</span>
+                      <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
+                  </div>
+                  <label></label>
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Confirm Password</span>
+                      <input style="width:400px" type="password" class="form-control" placeholder="Confirm Password" aria-describedby="sizing-addon2" >
+                  </div>
+              </div>
+              <a href="">
+                <div class="modal-footer" >
+                    <div align="center">
+                        <button type="button" class="btn btn-primary">Change Password</button>
+                    </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+    <div align="center">
+        <button style=" margin-top:50px; width:250px;" data-toggle="modal" data-target="#changedetails" type="button" class="btn btn-warning">
+         Change Personal Details
+    </button>
+    </div>
+
+  <div class="modal fade" id="changedetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" align="center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Update Detailes</h4>
+          </div>
+          <div class="modal-body">
+              <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Name *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Name" aria-describedby="sizing-addon2">
+                  </div>
+                  <label></label>
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Phone Number *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Phone No." aria-describedby="sizing-addon2">
+                  </div>
+                  <label></label>
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Room Number *</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Room No." aria-describedby="sizing-addon2">
+                  </div>
+                  <label></label>
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Facebook id*</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="FB id (optional)" aria-describedby="sizing-addon2">
+                  </div>
+                    <label></label>
+                  <div class="input-group">
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Password</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon2">
+                  </div>
+          </div>
+          <a href="">
+            <div class="modal-footer" >
+                <div align="center">
+                    <button type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 </div>
