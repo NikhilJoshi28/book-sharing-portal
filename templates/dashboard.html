@@ -57,42 +57,16 @@
              <button style="margin-top:20px; margin-left:20px;" type="submit" class="btn btn-primary">Submit</button>
         </form>
         <label></label>
-        <div style="margin-top:70px; margin-right:50px">
-            <div class="list-group" align="left">
-              <a href="" class="list-group-item active">
-                <h4 class="list-group-item-heading">Book Name 0</h4>
-                <p class="list-group-item-text">Book Details 0</p>
-              </a>
+        {% for book in Book_details["Book"] %}
+            <div style="margin-top:70px; margin-right:50px">
+                <div class="list-group" align="left">
+                  <a href="" class="list-group-item active ">
+                    <h4 class="list-group-item-heading">{{ book[0] }}</h4>
+                    <p class="list-group-item-text">Edition:-{{ book[1] }}   Author:-{{ book[2]}}    Avilability:-{{ book[3] }}</p>
+                  </a>
+                </div>
             </div>
-
-            <div class="list-group">
-              <a href="" class="list-group-item active">
-                <h4 class="list-group-item-heading">Book Name 1</h4>
-                <p class="list-group-item-text">Book Details 1</p>
-              </a>
-            </div>
-
-            <div class="list-group">
-              <a href="" class="list-group-item active">
-                <h4 class="list-group-item-heading">Book Name 2</h4>
-                <p class="list-group-item-text">Book Details 2</p>
-              </a>
-            </div>
-            <div class="list-group" align="left">
-              <a href="" class="list-group-item active">
-                <h4 class="list-group-item-heading">Book Name 3</h4>
-                <p class="list-group-item-text">Book Details 3</p>
-              </a>
-            </div>
-            <div class="list-group" align="left">
-              <a href="" class="list-group-item active">
-                <h4 class="list-group-item-heading">Book Name 4</h4>
-                <p class="list-group-item-text">Book Details 4</p>
-              </a>
-            </div>
-
-        </div>
-
+        {% endfor %}
       </div>
 
       <div role="tabpanel" class="tab-pane fade" id="bookshare">

@@ -1,5 +1,9 @@
 from flask import Flask,render_template
 from scripts import db
+from content_management import Content
+
+BOOK_DETAILS= Content()
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -13,7 +17,7 @@ def dashboard():
     #return ("hello dashboard")
     #add login functionality to database
     if(True):
-       return render_template("dashboard.html")
+       return render_template("dashboard.html",Book_details=BOOK_DETAILS)
     #else:
         #promt error on login form
 
