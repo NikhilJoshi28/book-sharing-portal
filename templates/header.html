@@ -31,6 +31,17 @@
 <body>
     <div class="border-row" style="width=100%;margin-buttom:20px"></div>
     <div class="container-fluid" style="min-height:100%;">
+
+        <!--{% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {%for message in messages %}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        -->
         {% block body %} {% endblock %}
 
     </div>

@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template, flash
 from scripts import dbconnect
 from content_management import Content
 from flask_wtf import Form
@@ -24,13 +24,14 @@ app = Flask(__name__)
 def index():
     return render_template("main.html")
 
-@app.route('/login/')
+@app.route('/login/', methods=['GET','POST'])
 def login_page():
     return render_template("login.html")
 
 #@app.route('dash-board/')
 @app.route('/dashboard/')
 def dashboard():
+    #flash("Flash !! test")
     #add login functionality to database
     if(True):
        return render_template("dashboard.html",Book_details=BOOK_DETAILS)
