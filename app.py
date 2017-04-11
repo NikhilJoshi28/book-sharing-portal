@@ -1,5 +1,10 @@
 from flask import Flask,render_template
 from scripts import dbconnect
+from flask import Flask,render_template, flash
+from content_management import Content
+
+BOOK_DETAILS= Content()
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -16,7 +21,7 @@ def login_page():
 def dashboard():
     #add login functionality to database
     if(True):
-       return render_template("dashboard.html")
+       return render_template("dashboard.html",Book_details=BOOK_DETAILS)
     #else:
         #promt error on login form
 
@@ -24,6 +29,10 @@ def dashboard():
 def signup():
     print("Signing up")
     #signup function
+
+@app.errorhandler(404)
+def pageNotFound(e):
+    return render_template("404.html")
 
 
 if __name__=='__main__':
