@@ -1,9 +1,7 @@
 from flask import Flask,render_template,request,flash,redirect,url_for,session
-from flask_wtf import Form
-from wtforms import BooleanField,StringField,PasswordField,validators
 from passlib.hash import sha256_crypt
 from MySQLdb import escape_string as thwart
-import gc
+import gc, requests
 
 from scripts import dbconnect
 from content_management import Content
@@ -29,27 +27,31 @@ def dashboard():
     #else:
         #promt error on login form
 
-@app.route('/signup/', methods=["GET","POST"])
-def signup():
+@app.route('/signUp/', methods=["GET","POST"])
+def signUp():
     try:
 
-        if request.method == "POST" and form.validate():
-            username = form.username.data
-            email = form.email.data
-            password = sha256_crypt.encrypt((str(form.password.data)))
+        if request.method == "POST":
+            uid = request.form['uid']
+            password = sha256_crypt.encrypt((str(request.form['password'])))
             c, conn = dbconnect.connection()
 
-            x = c.execute("SELECT * FROM users WHERE username = (%s)",
-                          (thwart(username)))
+            x = c.execute("SELECT * FROM credentials WHERE uid = (%s)",
+                          (thwart(uid)))
 
             if int(x) > 0:
                 flash("That username is already taken, please choose another")
-                return render_template('main.html', form=form)
+                return render_template('main.html')
 
             else:
-                c.execute("INSERT INTO credentials (uid, password, email, tracking) VALUES (%s, %s, %s, %s)",
-                          (thwart(username), thwart(password), thwart(email),
-                           thwart("/introduction-to-python-programming/")))
+                name = request.form['name']
+                phno = request.form['phno']
+                roomno = request.form['roomno']
+                fbid = request.form['fbid']
+                c.execute("INSERT INTO credentials (uid, password) VALUES (%s, %s)",
+                          (thwart(uid), thwart(password)))
+                c.execute("INSERT INTO users (uid, name, phno, roomno, fbid) VALUES (%s, %s, %s, %s, %s)",
+                          (thwart(uid), thwart(name), thwart(phno), thwart(roomno), thwart(fbid)))
 
                 conn.commit()
                 flash("Thanks for registering!")
@@ -58,7 +60,7 @@ def signup():
                 gc.collect()
 
                 session['logged_in'] = True
-                session['username'] = username
+                session['uid'] = uid
 
                 return redirect(url_for('dashboard'))
 

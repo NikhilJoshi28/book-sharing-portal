@@ -6,7 +6,7 @@
          <meta content="width=device-width,initial-scale=1" name=viewport>
         <link href=../assets/css/docs.min.css rel=stylesheet>
         <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-        <link rel="shortcut Icon" href="{{ url_for('static',filename='Images/ic_shuffle_black_24dp.png') }}">
+        <link rel="shortcut Icon"href="{{ url_for('static',filename='Images/ic_shuffle_black_24dp.png') }}">
     </head>
 
 <header>
@@ -15,7 +15,7 @@
           <img style="max-width:120px; margin-top:-7px;" src="{{ url_for('static',filename='Images/Logo2.jpeg') }}">
       </a>
         <a href="/GuestLogin/">
-            <button style="margin-top:20px;" type="button" class="btn btn-danger" aria-label="Left Align">
+            <button style="margin-top:20px;" type="button"class="btn btn-danger" aria-label="Left Align">
                 <span class=" glyphicon glyphicon-user" aria-hidden="true"></span>
                 Guest Login
             </button>
@@ -24,7 +24,7 @@
     <ul class="nav navbar-nav navbar-right">
 
         <!-- Button trigger modal -->
-        <button style="margin-top:20px; margin-right:10px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+        <button style="margin-top:20px; margin-right:10px" type="button"class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
           <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
             Login
         </button>
@@ -34,25 +34,25 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header" align="center">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Login</h4>
               </div>
               <div class="modal-body">
 
                   <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required required id="sizing-addon2">BITS ID</span>
-                      <input style="width:400px" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2">
+                      <span style="float:center; width:150px" class="input-group-addon"  id="sizing-addon2">BITS ID</span>
+                      <input style="width:400px" type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2" required>
                   </div>
                   <label></label>
                   <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Password</span>
-                      <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
+                      <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Password</span>
+                      <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" required >
                   </div>
               </div>
               <a href="/dashboard/">
                 <div class="modal-footer" >
                     <div align="center">
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button"class="btn btn-primary">Login</button>
                     </div>
                 </div>
               </a>
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Signup trigger modal -->
-        <button style="margin-top:20px; margin-right:40px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#SignupModal">
+        <button style="margin-top:20px; margin-right:40px" type="button"class="btn btn-danger" data-toggle="modal" data-target="#SignupModal">
           <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             Signup
         </button>
@@ -71,54 +71,55 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header" align="center">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
               </div>
-              <div class="modal-body">
-
-                  <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">BITS Id *</span>
-                      <input style="width:400px" type="text" class="form-control" placeholder="BITS Id" aria-describedby="sizing-addon2">
+              <form class="form-signin" action="/signUp/" method="post" role="form" id="signUpForm">
+                  <div class="modal-body">
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="bitsID">BITS ID</span>
+                          <input style="width:400px" type="text" class="form-control" placeholder="BITS ID" aria-describedby="sizing-addon2" required>
+                      </div>
+                      <label></label>
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="password">Password</span>
+                          <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" required >
+                      </div>
+                      <label></label>
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="cpassword">Confirm Password</span>
+                          <input style="width:400px" type="password" class="form-control" placeholder="Confirm Password" aria-describedby="sizing-addon2" required >
+                      </div>
+                      <label></label>
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="name">Name</span>
+                          <input style="width:400px" type="text" class="form-control" placeholder="Name" aria-describedby="sizing-addon2" required>
+                      </div>
+                      <label></label>
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="phno">Phone Number</span>
+                          <input style="width:400px" type="text" class="form-control" placeholder="Phone Number" aria-describedby="sizing-addon2" required>
+                      </div>
+                      <label></label>
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="roomno">Room Number</span>
+                          <input style="width:400px" type="text" class="form-control" placeholder="Room Number" aria-describedby="sizing-addon2" required>
+                      </div>
+                      <label></label>
+                      <div class="input-group">
+                          <span style="float:center; width:150px" class="input-group-addon" id="fbid">Facebook Link</span>
+                          <input style="width:400px" type="text" class="form-control" placeholder="FB Link (optional)" aria-describedby="sizing-addon2" required>
+                      </div>
+                        <label></label>
                   </div>
-                  <label></label>
-                  <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Password *</span>
-                      <input style="width:400px" type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon2" >
-                  </div>
-                  <label></label>
-                  <div class="input-group">
-                      <span style="float:center; width:150px" style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Confirm Password *</span>
-                      <input style="width:400px" type="password" class="form-control" placeholder="Confirm Password" aria-describedby="sizing-addon2" >
-                  </div>
-                  <label></label>
-                  <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Name *</span>
-                      <input style="width:400px" type="text" class="form-control" placeholder="Name" aria-describedby="sizing-addon2">
-                  </div>
-                  <label></label>
-                  <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Phone Number *</span>
-                      <input style="width:400px" type="text" class="form-control" placeholder="Phone No." aria-describedby="sizing-addon2">
-                  </div>
-                  <label></label>
-                  <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Room Number *</span>
-                      <input style="width:400px" type="text" class="form-control" placeholder="Room No." aria-describedby="sizing-addon2">
-                  </div>
-                  <label></label>
-                  <div class="input-group">
-                      <span style="float:center; width:150px" class="input-group-addon" required id="sizing-addon2">Facebook id*</span>
-                      <input style="width:400px" type="text" class="form-control" placeholder="FB id (optional)" aria-describedby="sizing-addon2">
-                  </div>
-                    <label></label>
-              </div>
-              <a href="/signup/">
-                <div class="modal-footer">
-                    <div align="center">
-                        <button type="button" class="btn btn-primary">Sign Up</button>
+                  <a href="/signUp/">
+                    <div class="modal-footer">
+                        <div align="center">
+                            <button type="button"class="btn btn-primary" id="signUp">Sign Up</button>
+                        </div>
                     </div>
-                </div>
-              </a>
+                  </a>
+              </form>
             </div>
           </div>
         </div>
@@ -138,10 +139,11 @@
         <input style="margin-left:70px" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
         <a href="/dashboard/">
-            <button style="margin-left:180px" type="button" class="btn btn-danger">Login</button>
+            <button style="margin-left:180px" type="button"class="btn btn-danger">Login</button>
         </a>
     </form>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/login.js') }}"> </script>
 </body>
 </html>
