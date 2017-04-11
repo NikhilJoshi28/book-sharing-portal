@@ -8,18 +8,6 @@ import gc
 from scripts import dbconnect
 from content_management import Content
 
-
-class RegistrationForm(Form):
-    username = StringField('Username', [validators.Length(min=4, max=20)])
-    email = StringField('Email Address', [validators.Length(min=6, max=50)])
-    password = PasswordField('New Password', [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)',
-                              [validators.Required()])
-
 BOOK_DETAILS= Content()
 
 app = Flask(__name__)
@@ -44,7 +32,6 @@ def dashboard():
 @app.route('/signup/', methods=["GET","POST"])
 def signup():
     try:
-        form = RegistrationForm(request.form)
 
         if request.method == "POST" and form.validate():
             username = form.username.data
@@ -57,10 +44,10 @@ def signup():
 
             if int(x) > 0:
                 flash("That username is already taken, please choose another")
-                return render_template('register.html', form=form)
+                return render_template('main.html', form=form)
 
             else:
-                c.execute("INSERT INTO users (username, password, email, tracking) VALUES (%s, %s, %s, %s)",
+                c.execute("INSERT INTO credentials (uid, password, email, tracking) VALUES (%s, %s, %s, %s)",
                           (thwart(username), thwart(password), thwart(email),
                            thwart("/introduction-to-python-programming/")))
 
@@ -74,8 +61,6 @@ def signup():
                 session['username'] = username
 
                 return redirect(url_for('dashboard'))
-
-        return render_template("register.html", form=form)
 
     except Exception as e:
         return (str(e))
