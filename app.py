@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template, flash
 from scripts import db
 from content_management import Content
 
@@ -25,6 +25,10 @@ def dashboard():
 def signup():
     print("Signing up")
     #signup function
+
+@app.errorhandler(404)
+def pageNotFound(e):
+    return render_template("404.html")
 
 
 if __name__=='__main__':
