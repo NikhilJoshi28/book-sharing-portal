@@ -1,5 +1,7 @@
+// This is a copy of login.js, have to add all the details from add book form
+
 $(function() {
-    $('#signUp').click(function() {
+    $('#addBook').click(function() {
         var uid = $('#bitsID').val();
         var name = $('#name').val();
         var password = $('#password').val();
@@ -8,7 +10,7 @@ $(function() {
         var roomno = $('#roomno').val();
         var fbid = $('#fbid').val();
         $.ajax({
-            url: '/dashboard/',         //dashboard is just for testing, have to change it later to /signup/
+            url: '/dashboard/',
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
