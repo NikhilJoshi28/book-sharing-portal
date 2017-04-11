@@ -58,11 +58,11 @@
         </form>
         <label></label>
         {% for book in Book_details["Book"] %}
-            <div style="margin-top:70px; margin-right:50px">
+            <div style="margin-top:50px; margin-right:50px">
                 <div class="list-group" align="left">
                   <a href="" class="list-group-item active ">
                     <h4 class="list-group-item-heading">{{ book[0] }}</h4>
-                    <p class="list-group-item-text">Edition:-{{ book[1] }}   Author:-{{ book[2]}}    Avilability:-{{ book[3] }}</p>
+                    <p class="list-group-item-text">Edition:-  {{ book[1] }}<br>Author:-  {{ book[2]}}<br>Avilability:-  {{ book[3] }}</p>
                   </a>
                 </div>
             </div>
