@@ -3,3 +3,4 @@ passlib
 
 pip install flask-wtf
 sudo apt-get install mysql-server
+pip install passlib
