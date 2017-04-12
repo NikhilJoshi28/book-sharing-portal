@@ -2,12 +2,14 @@
 
 {% block body %}
 <body>
-    <div class="container">
+    <div class="container" style="position:relative; margin-top:70px">
         <br>
         <h4>Please login</h4>
         <br>
         <form action="" class="form-inline" method="post">
-
+            <input type="text" class="form-control" placeholder="Username" name="username" value="{{request.form.username}}">
+            <input type="password" class="form-control" placeholder="Password" name="password" value="{{request.form.password}}">
+            <input class="btn btn-danger" type="submit" value="Login">
         </form>
 
     </div>

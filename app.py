@@ -1,4 +1,4 @@
-from flask import Flask,render_template, flash
+from flask import Flask,render_template, flash,request,url_for,redirect
 from scripts import dbconnect
 from content_management import Content
 from flask_wtf import Form
@@ -20,13 +20,47 @@ BOOK_DETAILS= Content()
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=["GET","POST"])
 def index():
+    try:
+        if request.method == "POST":
+            attempted_username = request.form['username']
+            attempted_password = request.form['password']
+            print attempted_password
+            print attempted_username
+
+            if attempted_username=="admin" and attempted_password=="password":
+                return redirect(url_for('dashboard'))
+            else:
+                print "invalid credentials"
+
+        return render_template("main.html")
+
+    except Exception as e:
+        print e
     return render_template("main.html")
 
 @app.route('/login/', methods=['GET','POST'])
 def login_page():
-    return render_template("login.html")
+        try:
+            if request.method == "POST":
+                attempted_username = request.form['username']
+                attempted_password = request.form['password']
+                print attempted_password
+                print attempted_username
+
+                if attempted_username == "admin" and attempted_password == "password":
+                    return redirect(url_for('dashboard'))
+                else:
+                    print "invalid credentials"
+
+            return render_template("login.html")
+
+        except Exception as e:
+            print e
+        return render_template("login.html")
+
+    #return render_template("login.html")
 
 #@app.route('dash-board/')
 @app.route('/dashboard/')
