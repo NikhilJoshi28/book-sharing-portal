@@ -1,0 +1,35 @@
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item clearfix">
+          <span class="label label-info">BOOKNames &nbsp;</span>
+          <span class="labe">Author</span>
+            <span class="pull-right button-group">
+                <a href="/admin/userA" class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Availibility Status</a>
+                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
+            </span>
+        </li>
+    </ul>
+</div>
+
+
+
+<span class="pull-right button-group">
+                    {% if {{ book[4] }} == '1' %}
+                    <a href="/admin/userA" class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </a>
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
+                    {% endif %}
+                    {% if {{ book[4] }} == '0' %}
+                    <a href="/admin/userA" class="btn btn-danger"><span class="glyphicon glyphicon-info-sign"></span> Unavailable </a>
+                    {% endif %}
+                </span>
+
+
+<span class="pull-right button-group">
+                    <!--{% if {{ book[4] }} == '1' %}-->
+                    <a href="/admin/userA" class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </a>
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
+                    <!--{% endif %}
+                    {% if {{ book[4] }} == '0' %}
+                    <a href="/admin/userA" class="btn btn-danger"><span class="glyphicon glyphicon-info-sign"></span> Unavailable </a>
+                    {% endif %}-->
+                </span>

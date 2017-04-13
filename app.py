@@ -6,8 +6,9 @@ from passlib.hash import sha256_crypt
 from wtforms import StringField, validators, PasswordField, Form
 
 from dbconnect import connection
-from content_management import Content
+from content_management import Content, searchContent
 
+app = Flask(__name__)
 
 class RegistrationForm(Form):
     bitsid = StringField('bitsid', [validators.DataRequired(), validators.Length(min=12, max=15)])
@@ -19,8 +20,6 @@ class RegistrationForm(Form):
     facebook = StringField('FaceLink',[validators.Length(min=10,max=100)])
 
 BOOK_DETAILS= Content()
-
-app = Flask(__name__)
 
 @app.route('/', methods=["GET","POST"])
 def index():
@@ -126,6 +125,7 @@ def dashboard():
             edition = request.form['edition']
             avlstatus = (int)(request.form['avlstatus'])
             bookID = hashlib.sha1(bookname.encode("UTF-8")).hexdigest()[:20]
+
             c, conn = connection()
 
             c.execute("INSERT INTO bookdetails VALUES ( %s, %s, %s, %s, %s)",
@@ -150,5 +150,12 @@ def confirmation():
 def pageNotFound(e):
     return render_template("404.html")
 
+@app.route('/search/', methods=['POST'])
+def search():
+    if request.method == "POST":
+        query = request.form['search']
+        print query
+        BOOK_DETAILS=searchContent(query)
+    return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 if __name__=='__main__':
       app.run(host='0.0.0.0', port=4141, debug=True, threaded=True)

@@ -47,24 +47,35 @@
 
   <!-- Tab panes -->
   <div class="tab-content">
+      <span class="divider">&ensp;</span>
       <div role="tabpanel" class="tab-pane fade in active" id="search">
-         <form class="navbar-form navbar-left" role="search">
-             <div class="form-group" style="margin-top:20px;">
-                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                 <input type="text" class="form-control" placeholder="Search">
-             </div>
-             <button style="margin-top:20px; margin-left:20px;" type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="container">
+	<div class="row">
+       <div id="custom-search-input">
+            <div class="input-group col-md-9">
+                 <form action='/search/' method="post" name="searchBar" >
+                <input type="text" class=" search-query form-control" name="search" value="{{request.form.search}}" />
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button">
+                        <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
+      <span class="divider">&ensp;</span>
       <div role="banner">
         {% for book in Book_details %}
             <ul class="list-group">
                 <li class="list-group-item clearfix">
                 <h4 class="list-group-item-heading">{{book[0]}}</h4>
-                <span class="label label-default">Edition:-  {{ book[2] }} </span>
-                <span class="label label-default"> {{ book[1]}} </span>
-                   <span class="pull-right button-group">
-                        <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
+                <span class="label label-info">Edition:-  {{ book[2] }}</span>&ensp;
+                <span class="label label-default">{{ book[1]}} </span>
+                <span class="pull-right button-group">
+                    <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
                 </span>
                 </li>
             </ul>
