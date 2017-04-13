@@ -36,7 +36,14 @@ def index():
             print attempted_password
             print attempted_username
 
-            if attempted_username=="admin" and attempted_password=="password":
+            c ,conn = connection()
+            getpassword = str(c.execute("SELECT password FROM users WHERE uid= %s",(attempted_username,)))
+            print getpassword
+
+            c.close()
+            conn.close()
+
+            if (attempted_username=="admin" and attempted_password=="password") or (sha256_crypt.verify(attempted_password,getpassword)):
                 return redirect(url_for('dashboard'))
             else:
                 print "invalid credentials"
@@ -69,6 +76,7 @@ def registration():
 
             x = c.execute("SELECT * FROM users WHERE uid= %s",(userid,))
             print x
+
             if int(x) > 0:
                 print "Username Already taken"
                 return render_template('register.html', form=form)
