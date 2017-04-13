@@ -135,6 +135,10 @@ def signup():
     except Exception as e:
         return(str(e))
 
+@app.route('/register_confirm/')
+def confirmation():
+    return render_template("registration_confirm.html")
+
 @app.errorhandler(404)
 def pageNotFound(e):
     return render_template("404.html")

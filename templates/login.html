@@ -7,8 +7,13 @@
         <h4>Please login</h4>
         <br>
         <form action="" class="form-inline" method="post">
+            <h3><span class="label label-default">BitsId</span></h3>
             <input type="text" class="form-control" placeholder="Username" name="username" value="{{request.form.username}}">
+            <br>
+            <br>
+            <h3><span class="label label-default">Password</span></h3>
             <input type="password" class="form-control" placeholder="Password" name="password" value="{{request.form.password}}">
+            <br><br>
             <input class="btn btn-danger" type="submit" value="Login">
         </form>
     </div>
