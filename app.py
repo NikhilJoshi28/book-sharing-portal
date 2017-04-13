@@ -11,15 +11,12 @@ from content_management import Content
 
 class RegistrationForm(Form):
     bitsid = StringField('bitsid', [validators.DataRequired(), validators.Length(min=12, max=15)])
-    #email = StringField('Email Address', [validators.Length(min=6, max=50)])
     password = PasswordField('New Password', [validators.DataRequired(),validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password')
     name = StringField('Name', [validators.DataRequired(),   validators.Length(min=5,max=50)])
     phoneno = StringField('PhoneNo',[validators.DataRequired(), validators.text_type(int),validators.Length(min=10,max=12)])
     roomno = StringField('RoomNo',[validators.DataRequired(), validators.Length(min=4,max=7)])
     facebook = StringField('FaceLink',[validators.Length(min=10,max=100)])
-    #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)',
-    #                          [validators.DataRequired()])
 
 BOOK_DETAILS= Content()
 
@@ -39,9 +36,6 @@ def index():
                 return redirect(url_for('dashboard'))
             else:
                 print "invalid credentials"
-
-
-
         return render_template("main.html")
 
     except Exception as e:
@@ -115,52 +109,22 @@ def login_page():
 
     #return render_template("login.html")
 
-#@app.route('dash-board/')
-@app.route('/dashboard/')
+@app.route('/dashboard/', methods=['GET','POST'])
 def dashboard():
-    #flash("Flash !! test")
-    #add login functionality to database
-    if(True):
-       return render_template("dashboard.html",Book_details=BOOK_DETAILS)
-    #else:
-        #promt error on login form
-
-@app.route('/signup/', methods=["GET","POST"])
-def signup():
     try:
-        if request.method == "POST" and form.validate():
-            username = form.username.data
-            email = form.email.data
-            password = sha256_crypt.encrypt((str(form.password.data)))
-            c, conn = dbconnect.connection()
+        if request.method == "POST":
+            bookname = request.form['bookname']
+            author = request.form['author']
+            edition = request.form['edition']
+            avlstatus = request.form['avlstatus']
 
-            x = c.execute("SELECT * FROM users WHERE username = (%s)",
-                          (thwart(username)))
+            print bookname
 
-            if int(x) > 0:
-                flash("That username is already taken, please choose another")
-                return render_template('main.html', form=form)
+        return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
-            else:
-                c.execute("INSERT INTO credentials (uid, password, email, tracking) VALUES (%s, %s, %s, %s)",
-                          (thwart(username), thwart(password), thwart(email),
-                           thwart("/introduction-to-python-programming/")))
-
-                conn.commit()
-                flash("Thanks for registering!")
-                c.close()
-                conn.close()
-                gc.collect()
-
-                session['logged_in'] = True
-                session['username'] = username
-
-                return redirect(url_for('dashboard'))
-        c, conn = connection()
-        print("okay")
-        return("okay")
     except Exception as e:
-        return (str(e))
+        print e
+    return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
 @app.route('/register_confirm/')
 def confirmation():

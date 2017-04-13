@@ -78,41 +78,41 @@
               <!-- Add button Modal-->
               <div class="modal fade" id="Addbook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
+                  <form method="post" name="addBookModal">
                     <div class="modal-content">
                       <div class="modal-header" align="center">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Book Detailes</h4>
+                        <h4 class="modal-title" id="myModalLabelBook">Book Detailes</h4>
                       </div>
                       <div class="modal-body">
                           <div class="input-group">
-                              <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Book Name</span>
-                              <input style="width:400px" type="text" class="form-control" placeholder="Book Name" aria-describedby="sizing-addon2">
+                              <span style="float:center; width:150px" class="input-group-addon" id="bookname">Book Name</span>
+                              <input style="width:400px" type="text" class="form-control" name="bookname" value="{{request.form.bookname}}" placeholder="Book Name" aria-describedby="sizing-addon2">
                           </div>
                           <label></label>
                           <div class="input-group">
-                              <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Author</span>
-                              <input style="width:400px" type="text" class="form-control" placeholder="Author" aria-describedby="sizing-addon2">
+                              <span style="float:center; width:150px" class="input-group-addon" id="author">Author</span>
+                              <input style="width:400px" type="text" class="form-control" name="author" value="{{request.form.author}}" placeholder="Author" aria-describedby="sizing-addon2">
                           </div>
                           <label></label>
                           <div class="input-group">
-                              <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Edition</span>
-                              <input style="width:400px" type="text" class="form-control" placeholder="Edition" aria-describedby="sizing-addon2">
+                              <span style="float:center; width:150px" class="input-group-addon" id="edition">Edition</span>
+                              <input style="width:400px" type="text" class="form-control" name="edition" value="{{request.form.edition}}" placeholder="Edition" aria-describedby="sizing-addon2">
                           </div>
                           <label></label>
                           <div class="input-group">
-                              <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Availability Status</span>
-                              <input style="width:400px" type="text" class="form-control" placeholder="Status" aria-describedby="sizing-addon2">
+                              <span style="float:center; width:150px" class="input-group-addon" id="avlstatus">Availability Status</span>
+                              <input style="width:400px" type="text" class="form-control" name="avlstatus" value="{{request.form.avlstatus}}" placeholder="Status" aria-describedby="sizing-addon2">
                           </div>
                           <label></label>
                       </div>
-                      <a href="">
                         <div class="modal-footer" >
                             <div align="center">
-                                <button type="button" class="btn btn-primary">Submit For Share</button>
+                                <button type="submit" class="btn btn-primary">Submit For Share</button>
                             </div>
                         </div>
-                      </a>
                     </div>
+                  </form>
                   </div>
               </div>
           </div>
@@ -168,7 +168,7 @@
                 <div class="modal-content">
                   <div class="modal-header" align="center">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+                    <h4 class="modal-title" id="myModalLabelUpdate">Change Password</h4>
                   </div>
                   <div class="modal-body">
                       <div class="input-group">
