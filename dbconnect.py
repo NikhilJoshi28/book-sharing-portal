@@ -4,6 +4,7 @@ def connection():
     conn = MySQLdb.connect(host="localhost",
                            user = "root",
                            passwd = "mysqlpass",
-                           db = "appdb")
+                           db = "booksharing")
     c = conn.cursor()
+    print('hello')
     return c, conn
