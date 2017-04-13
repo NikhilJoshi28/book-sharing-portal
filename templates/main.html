@@ -33,11 +33,11 @@
 
             <div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
-                <form method="post">
+                <form method="post" name="LoginModal">
                   <div class="modal-content">
                   <div class="modal-header" align="center">
                     <button type="button"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Login</h4>
+                    <h4 class="modal-title" id="myModalLabel1">Login</h4>
                   </div>
                   <div class="modal-body">
 
@@ -76,13 +76,13 @@
             <div class="modal-content">
               <div class="modal-header" align="center">
                 <button type="button"class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+                <h4 class="modal-title" id="myModalLabel2">Sign Up</h4>
               </div>
               <form class="form-signin" action="/signUp/" method="post" role="form" id="signUpForm">
                   <div class="modal-body">
                       <div class="input-group">
                           <span style="float:center; width:150px" class="input-group-addon" id="bitsID">BITS ID</span>
-                          <input style="width:400px" type="text" class="form-control" placeholder="BITS ID" aria-describedby="sizing-addon2" required>
+                          <input style="width:400px" type="text" class="form-control" placeholder="BITS ID"  aria-describedby="sizing-addon2" required>
                       </div>
                       <label></label>
                       <div class="input-group">
@@ -133,7 +133,7 @@
 
 
 <body background="/static/Images/back2.jpg">
-    <form method="post">
+    <form method="post" name="LoginModal" id="#LoginModal">
       <div class="form-group" style="margin-right:1000px">
         <label style="margin-top:250px; margin-left:-200px" for="exampleInputEmail1">BITS Id</label>
         <input style="margin-left:70px" type="text" class="form-control" id="exampleInputEmail1" name="username" placeholder="BITS Id" value="{{request.form.username}}">

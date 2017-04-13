@@ -1,20 +1,26 @@
-from flask import Flask,render_template, flash,request,url_for,redirect
-from scripts import dbconnect
+import gc
+#from MySQLdb import escape_string as
+
+from flask import Flask, render_template, request, url_for, redirect, session
+from passlib.hash import sha256_crypt
+from wtforms import StringField, validators, PasswordField, Form
+
+from dbconnect import connection
 from content_management import Content
-from flask_wtf import Form
-from wtforms import BooleanField,validators,StringField,PasswordField
 
 
 class RegistrationForm(Form):
-    username = StringField('Username', [validators.Length(min=4, max=20)])
-    email = StringField('Email Address', [validators.Length(min=6, max=50)])
-    password = PasswordField('New Password', [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)',
-                              [validators.Required()])
+    bitsid = StringField(u'bitsid', [validators.DataRequired(), validators.Length(min=12, max=15)])
+    #email = StringField('Email Address', [validators.Length(min=6, max=50)])
+    password = PasswordField(u'New Password', [validators.DataRequired(),validators.EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField(u'Repeat Password')
+    name = StringField(u'Name', [validators.DataRequired(),   validators.Length(min=5,max=50)])
+    phoneno = StringField(u'PhoneNo',[validators.DataRequired(), validators.text_type(int),validators.Length(min=10,max=12)])
+    roomno = StringField(u'RoomNo',[validators.DataRequired(), validators.Length(min=4,max=7)])
+    facebook = StringField(u'FaceLink',[validators.Length(min=10,max=100)])
+    #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)',
+    #                          [validators.DataRequired()])
+
 
 BOOK_DETAILS= Content()
 
@@ -26,6 +32,7 @@ def index():
         if request.method == "POST":
             attempted_username = request.form['username']
             attempted_password = request.form['password']
+
             print attempted_password
             print attempted_username
 
@@ -34,11 +41,60 @@ def index():
             else:
                 print "invalid credentials"
 
+
+
         return render_template("main.html")
 
     except Exception as e:
         print e
     return render_template("main.html")
+
+
+@app.route('/register/', methods=["GET","POST"])
+def registration():
+    print "###"
+    try:
+        form = RegistrationForm(request.form)
+        print "@@@"
+        if request.method == "POST":
+            print "&&&&"
+            userid = str(form.bitsid.data)
+            username = str(form.name.data)
+            password = str(sha256_crypt.encrypt((str(form.password.data))))
+            phoneno = str(form.phoneno.data)
+            roomno = str(form.roomno.data)
+            facebookid = str(form.facebook.data)
+            c, conn = connection()
+            print userid
+
+            print(c.execute("SELECT * FROM users"))
+            #print "*******"
+            #prin# t x
+            x = 0
+            if int(x) > 0:
+                print "Username Already taken"
+                return render_template('register.html', form=form)
+            else:
+                c.execute("INSERT INTO users VALUES ( %s, %s, %s)", ((userid),(username),(password)))
+                c.execute("INSERT INTO userdetailes VALUES ( %s, %s, %s, %s, %s)",((userid),(username),(phoneno),(roomno),(facebookid)))
+                conn.commit()
+                print "data added"
+                c.close()
+                conn.close()
+                gc.collect()
+
+                session['logged_in'] = True
+                session['username'] = username
+                return redirect(url_for('dashboard'))
+
+        else:
+            print "555"
+
+        return render_template("register.html", form=form)
+
+    except Exception as e:
+        print "****"
+        print e
 
 @app.route('/login/', methods=['GET','POST'])
 def login_page():
@@ -75,7 +131,7 @@ def dashboard():
 @app.route('/signup/', methods=["GET","POST"])
 def signup():
     try:
-        c, conn = dbconnect.connection()
+        c, conn = connection()
         print("okay")
         return("okay")
     except Exception as e:
@@ -86,4 +142,4 @@ def pageNotFound(e):
     return render_template("404.html")
 
 if __name__=='__main__':
-      app.run(host='0.0.0.0', port=4141, debug=True, threaded=True)
+      app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
