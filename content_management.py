@@ -1,7 +1,18 @@
+import gc
+from dbconnect import connection
+c, conn = connection()
 
 def Content():
-    BOOK_DETAILS= {"Book":[["Introduction To Algorithms","Second","Thomas Cormen","Available","/link0/"],
-                            ["Artificial Intelligence A Modern Approch","Third","Stuart J.Russell","Available","/link1/"],
-                            ["Fundamentals of Database System","Fifth","Ramez Elmasri","Not Available","/link2/"]]}
+    BOOK_DETAILS = []
+    c.execute("select * from bookdetails")
+    data = c.fetchall()
+    for row in data:
+        book = [ row[1], row[2], row[3], row[4] ]
+        BOOK_DETAILS.append(book)
+
+    conn.commit()
+    c.close()
+    conn.close()
+    gc.collect()
 
     return BOOK_DETAILS

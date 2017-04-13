@@ -1,4 +1,4 @@
-import gc
+import gc, hashlib
 #from MySQLdb import escape_string as
 
 from flask import Flask, render_template, request, url_for, redirect, session
@@ -124,9 +124,17 @@ def dashboard():
             bookname = request.form['bookname']
             author = request.form['author']
             edition = request.form['edition']
-            avlstatus = request.form['avlstatus']
+            avlstatus = (int)(request.form['avlstatus'])
+            bookID = hashlib.sha1(bookname.encode("UTF-8")).hexdigest()[:20]
+            c, conn = connection()
 
-            print bookname
+            c.execute("INSERT INTO bookdetails VALUES ( %s, %s, %s, %s, %s)",
+                      ((bookID), (bookname), (author), (edition), (int)(avlstatus)))
+            conn.commit()
+            print "data added"
+            c.close()
+            conn.close()
+            gc.collect()
 
         return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 

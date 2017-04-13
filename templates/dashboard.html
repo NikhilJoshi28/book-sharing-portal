@@ -55,17 +55,21 @@
              </div>
              <button style="margin-top:20px; margin-left:20px;" type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <label></label>
-        {% for book in Book_details["Book"] %}
-            <div style="margin-top:50px; margin-right:50px">
-                <div class="list-group" align="left">
-                  <a href="" class="list-group-item active ">
-                    <h4 class="list-group-item-heading">{{ book[0] }}</h4>
-                    <p class="list-group-item-text">Edition:-  {{ book[1] }}<br>Author:-  {{ book[2]}}<br>Avilability:-  {{ book[3] }}</p>
-                  </a>
-                </div>
-            </div>
+      <div role="banner">
+        {% for book in Book_details %}
+            <ul class="list-group">
+                <li class="list-group-item clearfix">
+                <h4 class="list-group-item-heading">{{book[0]}}</h4>
+                <span class="label label-default">Edition:-  {{ book[2] }} </span>
+                <span class="label label-default"> {{ book[1]}} </span>
+                   <span class="pull-right button-group">
+                        <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
+                </span>
+                </li>
+            </ul>
         {% endfor %}
+      </div>
       </div>
 
       <div role="tabpanel" class="tab-pane fade" id="bookshare">
@@ -102,7 +106,7 @@
                           <label></label>
                           <div class="input-group">
                               <span style="float:center; width:150px" class="input-group-addon" id="avlstatus">Availability Status</span>
-                              <input style="width:400px" type="text" class="form-control" name="avlstatus" value="{{request.form.avlstatus}}" placeholder="Status" aria-describedby="sizing-addon2">
+                              <input style="width:400px" type="text" class="form-control" name="avlstatus" value="1" placeholder="Status" aria-describedby="sizing-addon2">
                           </div>
                           <label></label>
                       </div>
