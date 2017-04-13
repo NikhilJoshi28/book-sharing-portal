@@ -3,8 +3,8 @@
 {% block body %}
 
 <body>
-    <div class ='container' style="margin-top:70px">
-        <h4>Register</h4>
+    <div class ='container' style="margin-top:80px">
+        <h3><span class="label label-primary">Sign Up Form</span></h3>
         <br>
         {% from "_formhelper.html" import render_field %}
         <form method=post action="/register/">
@@ -17,7 +17,7 @@
                 {{ render_field(form.roomno) }}
                 {{ render_field(form.facebook) }}
             </dl>
-            <p><input type="submit" value="Register"></p>
+            <p><input type="submit" value="Register" class="btn btn-danger"></p>
         </form>
         {% if error %}
             <p class="error"><strong>Error:</strong>{{ error }}</p>

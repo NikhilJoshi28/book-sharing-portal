@@ -10,14 +10,14 @@ from content_management import Content
 
 
 class RegistrationForm(Form):
-    bitsid = StringField(u'bitsid', [validators.DataRequired(), validators.Length(min=12, max=15)])
+    bitsid = StringField('bitsid', [validators.DataRequired(), validators.Length(min=12, max=15)])
     #email = StringField('Email Address', [validators.Length(min=6, max=50)])
-    password = PasswordField(u'New Password', [validators.DataRequired(),validators.EqualTo('confirm', message='Passwords must match')])
-    confirm = PasswordField(u'Repeat Password')
-    name = StringField(u'Name', [validators.DataRequired(),   validators.Length(min=5,max=50)])
-    phoneno = StringField(u'PhoneNo',[validators.DataRequired(), validators.text_type(int),validators.Length(min=10,max=12)])
-    roomno = StringField(u'RoomNo',[validators.DataRequired(), validators.Length(min=4,max=7)])
-    facebook = StringField(u'FaceLink',[validators.Length(min=10,max=100)])
+    password = PasswordField('New Password', [validators.DataRequired(),validators.EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField('Repeat Password')
+    name = StringField('Name', [validators.DataRequired(),   validators.Length(min=5,max=50)])
+    phoneno = StringField('PhoneNo',[validators.DataRequired(), validators.text_type(int),validators.Length(min=10,max=12)])
+    roomno = StringField('RoomNo',[validators.DataRequired(), validators.Length(min=4,max=7)])
+    facebook = StringField('FaceLink',[validators.Length(min=10,max=100)])
     #accept_tos = BooleanField('I accept the Terms of Service and Privacy Notice (updated Jan 22, 2015)',
     #                          [validators.DataRequired()])
 
@@ -67,10 +67,8 @@ def registration():
             c, conn = connection()
             print userid
 
-            print(c.execute("SELECT * FROM users"))
-            #print "*******"
-            #prin# t x
-            x = 0
+            x = c.execute("SELECT * FROM users WHERE uid= %s",(userid,))
+            print x
             if int(x) > 0:
                 print "Username Already taken"
                 return render_template('register.html', form=form)
@@ -83,8 +81,8 @@ def registration():
                 conn.close()
                 gc.collect()
 
-                session['logged_in'] = True
-                session['username'] = username
+                #session['logged_in'] = True
+                #session['username'] = username
                 return redirect(url_for('dashboard'))
 
         else:
@@ -142,4 +140,4 @@ def pageNotFound(e):
     return render_template("404.html")
 
 if __name__=='__main__':
-      app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
+      app.run(host='0.0.0.0', port=4141, debug=True, threaded=True)
