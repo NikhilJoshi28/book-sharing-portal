@@ -1,5 +1,4 @@
 import gc, hashlib, content_management
-#from MySQLdb import escape_string as
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from passlib.hash import sha256_crypt
@@ -125,15 +124,17 @@ def dashboard():
             bookID = hashlib.sha1(str(bookname+userID).encode("UTF-8")).hexdigest()[:20]
 
             c, conn = connection()
-
-            c.execute("INSERT INTO bookdetails VALUES ( %s, %s, %s, %s, %s, %s)",
+            x = c.execute("SELECT * FROM bookdetails WHERE bookID= %s", (bookID,))
+            if int(x < 1):
+                c.execute("INSERT INTO bookdetails VALUES ( %s, %s, %s, %s, %s, %s)",
                       ((bookID), (bookname), (author), (edition), (int)(avlstatus), (userID)))
-            conn.commit()
-            print "data added"
-            print session['userID'] + "this is in addBook, book is added"
-            c.close()
-            conn.close()
-            gc.collect()
+                conn.commit()
+                c.close()
+                conn.close()
+                gc.collect()
+            else:
+                print("duplicate entry")
+                #add flash message or something here
 
         return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
@@ -153,7 +154,6 @@ def pageNotFound(e):
 def search():
     if request.method == "POST":
         query = request.form['search']
-        print query
         BOOK_DETAILS=searchContent(query)
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
