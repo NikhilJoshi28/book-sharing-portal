@@ -61,18 +61,11 @@
                                        value="{{request.form.search}}"/>
                             </form>
                         </div>
-                        <!-- <div style="margin-left:25em; width:25px;" class="f">
-
-                                  <button class="btn btn-danger" type="button">
-                                      <span class=" glyphicon glyphicon-search"></span>
-                                  </button>
-
-                         </div>-->
                     </div>
                 </div>
             </div>
             <span class="divider">
-                <div style="margin-top:40px; margin-right:50px">
+               <div style="margin-top:40px; margin-right:50px">
                 <div role="banner">
                 {% for book in Book_details %}
                 <ul class="list-group">
@@ -137,9 +130,8 @@
                 </ul>
                 {% endfor %}
             </div>
-        </div>
-        </div>
-                &ensp;</span>
+           </div>
+            </span>
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="bookshare">
@@ -207,9 +199,9 @@
                     </div>
                 </div>
             </div>
-            <!--<div style="margin-top:40px; margin-right:50px">
+            <div style="margin-top:40px; margin-right:50px">
                 <div role="banner">
-                {% for book in Book_details %}
+                {% for book in Books_shared %}
                 <ul class="list-group">
                     <li class="list-group-item clearfix">
                         <h4 class="list-group-item-heading">{{book[0] }}</h4>
@@ -220,10 +212,10 @@
                             &ensp;
                             <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>&ensp;
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestModal"><span class="glyphicon glyphicon-plus"></span> Request</button>
-                              &lt;!&ndash; Modal &ndash;&gt;
+                              <!-- Modal -->
                               <div class="modal fade" id="requestModal" role="dialog">
                                 <div class="modal-dialog">
-                                  &lt;!&ndash; Modal content&ndash;&gt;
+                                  <!-- Modal content-->
                                 <form method="post" action="/sendRequest/" id="sendRequest">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -273,7 +265,7 @@
                 {% endfor %}
             </div>
         </div>
-        </div>-->
+        </div>
 
         <div role="tabpanel" class="tab-pane fade" id="increq">
             <div role="banner">

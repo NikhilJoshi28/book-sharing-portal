@@ -20,6 +20,7 @@ class RegistrationForm(Form):
     facebook = StringField('FaceLink',[validators.Length(min=10,max=100)])
 
 BOOK_DETAILS= Content()
+BOOKS_SHARED =[]
 SENT_REQUESTS = []
 INCOMING_REQUESTS = []
 
@@ -162,8 +163,8 @@ def search():
 @app.route('/booksShared/', methods=['POST'])
 def booksShared():
     if request.method == "POST":
-        BOOK_DETAILS=searchByID(session['userID'])
-    return render_template("dashboard.html", Book_details=BOOK_DETAILS)
+        BOOKS_SHARED=searchByID(session['userID'])
+    return render_template("dashboard.html", Books_shared=BOOKS_SHARED)
 
 @app.route('/sendRequest/', methods=['POST'])
 def sendRequest():
@@ -206,4 +207,4 @@ def sentRequests():
         return render_template("dashboard.html", Requests=SENT_REQUESTS)
 
 if __name__=='__main__':
-      app.run(host='0.0.0.0', port=4141, debug=True, threaded=True)
+      app.run(host='0.0.0.0', port=4142, debug=True, threaded=True)
