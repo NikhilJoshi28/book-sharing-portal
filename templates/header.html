@@ -46,7 +46,7 @@
         {% block body %} {% endblock %}
 
     </div>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>
