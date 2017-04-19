@@ -1,5 +1,5 @@
 {% macro render_field(field) %}
-    <dt class="input-group-addon">{{  field.label }}
+    <dt>{{  field.label }}
     <br/>
     <dd>{{ field(**kwargs) | safe }}
 

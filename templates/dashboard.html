@@ -53,7 +53,7 @@
         <div role="tabpanel" class="tab-pane fade in active" id="search">
             <div class="container">
                 <div class="row">
-                    <div id="custom-search-input" style="margin-left:17em;">
+                    <div id="custom-search-input" style="margin-left:17em;margin-right:40em;">
                         <div class="input-group col-md-9">
                             <form action='/search/' method="post" name="searchBar">
                                 <input type="text" class=" search-query form-control"
@@ -213,10 +213,10 @@
                             <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>&ensp;
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestModal"><span class="glyphicon glyphicon-plus"></span> Request</button>
                               <!-- Modal -->
-                              <div class="modal fade" id="requestModal" role="dialog">
+                              <div class="modal fade" id="requestModal1" role="dialog">
                                 <div class="modal-dialog">
                                   <!-- Modal content-->
-                                <form method="post" action="/sendRequest/" id="sendRequest">
+                                <form method="post" action="/sendRequest/" id="sendRequest1">
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -315,46 +315,49 @@
             </div></div>
 
         <div role="tabpanel" class="tab-pane fade" id="settings" align="center">
+        <form method="post" action="/changepassword/">
             <button style="margin-top:60px; width:250px;" data-toggle="modal" data-target="#changePass" type="button"
                     class="btn btn-warning">
                 Change Password
             </button>
-
+        </form>
             <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header" align="center">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabelUpdate">Change Password</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Old Password</span>
-                                <input style="width:400px" type="text" class="form-control" placeholder="old password"
-                                       aria-describedby="sizing-addon2">
+                    <form method="post" name="changePassModal">
+                        <div class="modal-content">
+                            <div class="modal-header" align="center">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabelUpdate">Change Password</h4>
                             </div>
-                            <label></label>
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">New Password</span>
-                                <input style="width:400px" type="password" class="form-control" placeholder="Password"
-                                       aria-describedby="sizing-addon2">
-                            </div>
-                            <label></label>
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Confirm Password</span>
-                                <input style="width:400px" type="password" class="form-control"
-                                       placeholder="Confirm Password" aria-describedby="sizing-addon2">
-                            </div>
-                        </div>
-                        <a href="">
-                            <div class="modal-footer">
-                                <div align="center">
-                                    <button type="button" class="btn btn-primary">Change Password</button>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon21">Old Password</span>
+                                    <input style="width:400px" type="text" class="form-control" placeholder="old password" name="oldpass"
+                                               value="{{request.form.oldpass}}" aria-describedby="sizing-addon2">
+                                </div>
+                                <label></label>
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon22">New Password</span>
+                                    <input style="width:400px" type="password" class="form-control" placeholder="Password" name="newpass"
+                                               value="{{request.form.newpass}}" aria-describedby="sizing-addon2">
+                                </div>
+                                <label></label>
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon23">Confirm Password</span>
+                                    <input style="width:400px" type="password" class="form-control" placeholder="Confirm Password" name="confpass"
+                                               value="{{request.form.confpass}}" aria-describedby="sizing-addon2">
                                 </div>
                             </div>
-                        </a>
-                    </div>
+                            <div class="modal-footer">
+                                <div align="center">
+
+                                        <button type="submit" class="btn btn-primary">Change Password</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
