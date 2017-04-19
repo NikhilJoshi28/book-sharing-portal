@@ -11,13 +11,13 @@ app = Flask(__name__)
 app.secret_key = 'beae135cce92ebf432b043c193ccf78eb8a986f8f9febcb7f14f64ba6bc9c387'
 
 class RegistrationForm(Form):
-    bitsid = StringField('bitsid', [validators.DataRequired(), validators.Length(min=12, max=15)])
+    bitsid = StringField('BitsId', [validators.DataRequired(), validators.Length(min=12, max=15)])
     password = PasswordField('New Password', [validators.DataRequired(),validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password')
     name = StringField('Name', [validators.DataRequired(), validators.Length(min=5,max=50)])
     phoneno = StringField('PhoneNo',[validators.DataRequired(), validators.text_type(int),validators.Length(min=10,max=12)])
     roomno = StringField('RoomNo',[validators.DataRequired(), validators.Length(min=4,max=7)])
-    facebook = StringField('FaceLink',[validators.Length(min=10,max=100)])
+    facebook = StringField('FaceBook Link',[validators.Length(min=10,max=100)])
 
 BOOK_DETAILS= Content()
 BOOKS_SHARED =[]
@@ -41,12 +41,12 @@ def registration():
     try:
         form = RegistrationForm(request.form)
         print "@@@"
-        if request.method == "POST" and form.validate():
+        if request.method == "POST" :
             print "&&&&"
             userid = str(form.bitsid.data)
             username = str(form.name.data)
-            #password = str(sha256_crypt.encrypt((str(form.password.data))))
-            password = str((form.password.data))
+            password = str(sha256_crypt.encrypt((str(form.password.data))))
+            #password = str((form.password.data))
             phoneno = str(form.phoneno.data)
             roomno = str(form.roomno.data)
             facebookid = str(form.facebook.data)
@@ -70,8 +70,8 @@ def registration():
 
                 session['logged_in'] = True
                 session['userID'] = userid
-                print session['userID'] + "this is in register"
-                return redirect(url_for('dashboard'))
+                print session['userID'] +" " + "this is in register"
+                return redirect(url_for('confirmation'))
 
         else:
             print "555"
@@ -100,14 +100,16 @@ def login():
                     data = c.fetchall()
                     for row in data:
                         print row[0], passEnc
-                        if passEnc == row[0]:
+                        if sha256_crypt.verify(passEnc,row[0]):
                             session['logged_in'] = True
                             session['userID'] = attempted_username
                             return redirect(url_for('dashboard'))
                     else:
+                        message = "invalid credentials"
                         print "invalid credentials"
                 else:
-                    print "user doesnot exist"
+                    message = "user does not exist"
+                    print "user does not exist"
 
             return render_template("main.html")
 
@@ -130,7 +132,7 @@ def dashboard():
             x = c.execute("SELECT * FROM bookdetails WHERE bookID = %s", (bookID,))
             if int(x < 1):
                 c.execute("INSERT INTO bookdetails VALUES ( %s, %s, %s, %s, %s, %s)",
-                      ((bookID), (bookname), (author), (edition), (int)(avlstatus), (userID)))
+                      ((bookID), (bookname), (edition), (author), (int)(avlstatus), (userID)))
                 conn.commit()
                 c.close()
                 conn.close()
@@ -145,7 +147,7 @@ def dashboard():
         print e
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
-@app.route('/register_confirm/')
+@app.route('/confirmation/')
 def confirmation():
     return render_template("registration_confirm.html")
 
