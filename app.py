@@ -45,8 +45,8 @@ def registration():
             print "&&&&"
             userid = str(form.bitsid.data)
             username = str(form.name.data)
-            password = str(sha256_crypt.encrypt((str(form.password.data))))
-            #password = str((form.password.data))
+            #password = str(sha256_crypt.encrypt((str(form.password.data))))
+            password = str((form.password.data))
             phoneno = str(form.phoneno.data)
             roomno = str(form.roomno.data)
             facebookid = str(form.facebook.data)
@@ -100,7 +100,7 @@ def login():
                     data = c.fetchall()
                     for row in data:
                         print row[0], passEnc
-                        if sha256_crypt.verify(passEnc,row[0]):
+                        if attempted_password == row[0]:
                             session['logged_in'] = True
                             session['userID'] = attempted_username
                             return redirect(url_for('dashboard'))
@@ -168,25 +168,30 @@ def booksShared():
         BOOKS_SHARED=searchByID(session['userID'])
     return render_template("dashboard.html", Books_shared=BOOKS_SHARED)
 
-@app.route('/changepassword/', methods = ['POST'] )
-def changepassword():
+@app.route('/changePassword/', methods = ['POST'] )
+def changePassword():
+    print "*************************"
     try:
+        print 35465
         if request.method == "POST":
+            print 11111
             oldPassword = request.form['oldpass']
             newPassword = request.form['newpass']
             confirmPassword = request.form['confpass']
 
-            print oldPassword,newPassword,confirmPassword
+            print oldPassword, newPassword, confirmPassword
             userID = str(session['userID'])
+            print userID
 
             c, conn = connection()
             c.execute("SELECT password FROM users WHERE uid= %s", (userID,))
             data = c.fetchall()
             if newPassword==confirmPassword:
+                print("okay")
                 for row in data:
                     print oldPassword,row[0]
-                    if sha256_crypt.verify(oldPassword,row[0]):
-                        c.execute("UPDATE users SET password = %s WHERE uid = %s",((str(sha256_crypt.encrypt(newPassword))),userID))
+                    if (oldPassword == row[0]):
+                        c.execute("UPDATE users SET password = %s WHERE uid = %s",((str(newPassword),userID)))
                         conn.commit()
                         print "password changed"
 
@@ -245,4 +250,4 @@ def sentRequests():
         return render_template("dashboard.html", Requests=SENT_REQUESTS)
 
 if __name__=='__main__':
-      app.run(host='0.0.0.0', port=4141, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=4142, debug=True, threaded=True)
