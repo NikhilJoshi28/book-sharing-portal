@@ -33,8 +33,10 @@
 
         <li role="presentation">
             <a href="#sentreq" aria-controls="sentreq" role="tab" data-toggle="tab">
-                <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                <form action="/sentRequests/" method="post" name="sentRequests">
+                <span class="glyphicon glyphicon-send" aria-hidden="true" onclick="sentRequests.submit()"></span>
                 Sent Request
+                </form>
             </a>
         </li>
         <li role="presentation">
@@ -70,27 +72,6 @@
                 </div>
             </div>
             <span class="divider">&ensp;</span>
-            <div role="banner">
-                {% for book in Book_details %}
-                <ul class="list-group">
-                    <li class="list-group-item clearfix">
-                        <h4 class="list-group-item-heading">{{book[0] }}</h4>
-                        <span class="label label-info">Edition:-  {{ book[2] }}</span>&ensp;
-                        <span class="label label-default">{{ book[1] }} </span>
-                        <span class="pull-right button-group" style="font-size:150%">
-                            {% if book[3] == 1  %}
-                            &ensp;
-                            <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>&ensp;
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Request</button>
-                            {% else %}
-                            &ensp;<span class="btn btn-danger"><span class="glyphicon glyphicon-info-sign"></span> Unavailable </span>&ensp;
-                            {% endif %}
-                        </span>
-                        <span class="pull-right label-success" style="font-size:120%; padding:0.3em; border-radius: 3%; background-color:#c6538c; color:white"> &ensp;{{ book[4] }} &ensp;</span>&ensp;
-                    </li>
-                </ul>
-                {% endfor %}
-            </div>
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="bookshare">
@@ -102,7 +83,8 @@
                     ADD
                 </button>
                 <form action="/booksShared/" method="post" name="bookShared">
-                    <button style="margin-top:40px; margin-left:20px; width:200px" type="submit" class="btn btn-primary">
+                    <button style="margin-top:40px; margin-left:20px; width:200px" type="submit"
+                            class="btn btn-primary">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         Refresh
                     </button>
@@ -158,46 +140,119 @@
                 </div>
             </div>
             <div style="margin-top:40px; margin-right:50px">
-                <div class="list-group" align="left">
-                    <a href="" class="list-group-item active">
-                        <h4 class="list-group-item-heading">Book Name 0</h4>
-                        <p class="list-group-item-text">Book Details 0</p>
-                    </a>
-                </div>
-
-                <div class="list-group">
-                    <a href="" class="list-group-item active">
-                        <h4 class="list-group-item-heading">Book Name 1</h4>
-                        <p class="list-group-item-text">Book Details 1</p>
-                    </a>
-                </div>
-
-                <div class="list-group">
-                    <a href="" class="list-group-item active">
-                        <h4 class="list-group-item-heading">Book Name 2</h4>
-                        <p class="list-group-item-text">Book Details 2</p>
-                    </a>
-                </div>
-                <div class="list-group" align="left">
-                    <a href="" class="list-group-item active">
-                        <h4 class="list-group-item-heading">Book Name 3</h4>
-                        <p class="list-group-item-text">Book Details 3</p>
-                    </a>
-                </div>
-                <div class="list-group" align="left">
-                    <a href="" class="list-group-item active">
-                        <h4 class="list-group-item-heading">Book Name 4</h4>
-                        <p class="list-group-item-text">Book Details 4</p>
-                    </a>
-                </div>
-
+                <div role="banner">
+                {% for book in Book_details %}
+                <ul class="list-group">
+                    <li class="list-group-item clearfix">
+                        <h4 class="list-group-item-heading">{{book[0] }}</h4>
+                        <span class="label label-info">Edition:-  {{ book[2] }}</span>&ensp;
+                        <span class="label label-default">{{ book[1] }} </span>
+                        <span class="pull-right button-group" style="font-size:150%">
+                            {% if book[3] == 1  %}
+                            &ensp;
+                            <span class="btn btn-success"><span class="glyphicon glyphicon-info-sign"></span> Available </span>&ensp;
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestModal"><span class="glyphicon glyphicon-plus"></span> Request</button>
+                              <!-- Modal -->
+                              <div class="modal fade" id="requestModal" role="dialog">
+                                <div class="modal-dialog">
+                                  <!-- Modal content-->
+                                <form method="post" action="/sendRequest/" id="sendRequest">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Modal Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="input-group">
+                                        <span style="float:center; width:150px" class="input-group-addon" id="lenderID">LenderID</span>
+                                        <input style="width:400px" aria-describedby="sizing-addon2" name="lenderID">{{book[4] }}>
+                                    </div>
+                                    <label></label>
+                                    <div class="input-group">
+                                        <span style="float:center; width:150px" class="input-group-addon" id="bookID">Book</span>
+                                        <input style="width:400px" aria-describedby="sizing-addon2" name="bookID">{{book[5] }}>
+                                    </div>
+                                    <label></label>
+                                    <div class="input-group">
+                                        <span style="float:center; width:150px" class="input-group-addon" id="startDate">Start Date</span>
+                                        <input style="width:400px" type="text" class="form-control" name="startDate"
+                                               value="{{request.form.startDate}}" placeholder="Choose Start Date"
+                                               aria-describedby="sizing-addon2">
+                                    </div><br/>
+                                    <div class="input-group">
+                                        <span style="float:center; width:150px" class="input-group-addon" id="endDate">End Date</span>
+                                        <input style="width:400px" type="text" class="form-control" name="startDate"
+                                               value="{{request.form.endDate}}" placeholder="Choose End Date"
+                                               aria-describedby="sizing-addon2">
+                                    </div>
+                                    <label></label>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="submit" class="btn btn-primary">Send Request</button>
+                                    </div>
+                                  </div>
+                                </form>
+                                </div>
+                            </div>
+                            {% else %}
+                            &ensp;<span class="btn btn-danger"><span class="glyphicon glyphicon-info-sign"></span> Unavailable </span>&ensp;
+                            {% endif %}
+                        </span>
+                        <span class="pull-right label-success"
+                              style="font-size:120%; padding:0.3em; border-radius: 3%; background-color:#c6538c; color:white"> &ensp;{{ book[4] }} &ensp;</span>
+                    </li>
+                </ul>
+                {% endfor %}
             </div>
-
+        </div>
         </div>
 
-        <div role="tabpanel" class="tab-pane fade" id="increq">c..</div>
+        <div role="tabpanel" class="tab-pane fade" id="increq">
+            <div role="banner">
+                {% for request in Requests %}
+                <ul class="list-group">
+                    <li class="list-group-item clearfix">
+                        <h4 class="list-group-item-heading">{{request[0] }}</h4>
+                        <span class="label label-info">Edition:-  {{ request[2] }}</span>&ensp;
+                        <span class="label label-default">{{ request[1] }} </span>
+                        <span class="pull-right button-group button-success" style="font-size:150%"> Approve </span>
+                        <span class="pull-right label-success"
+                              style="font-size:120%; padding:0.3em; border-radius: 3%; background-color:#c6538c; color:white"> &ensp;{{ request[4] }} &ensp;</span>
+                    </li>
+                </ul>
+                {% endfor %}
+                <form action="/incomingRequests/" method="post" name="incomingRequests">
+                    <button style="margin-top:40px; margin-left:20px; width:200px" type="submit"
+                            class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        Refresh
+                    </button>
+                </form>
+            </div>
+        </div>
 
-        <div role="tabpanel" class="tab-pane fade" id="sentreq">c..</div>
+        <div role="tabpanel" class="tab-pane fade" id="sentreq">
+            <div role="banner">
+                {% for request in Requests %}
+                <ul class="list-group">
+                    <li class="list-group-item clearfix">
+                        <h4 class="list-group-item-heading">{{request[0] }}</h4>
+                        <span class="label label-info">Edition:-  {{ request[2] }}</span>&ensp;
+                        <span class="label label-default">{{ request[1] }} </span>
+                        <span class="pull-right button-group button-success" style="font-size:150%"> Approve </span>
+                        <span class="pull-right label-success"
+                              style="font-size:120%; padding:0.3em; border-radius: 3%; background-color:#c6538c; color:white"> &ensp;{{ request[4] }} &ensp;</span>
+                    </li>
+                </ul>
+                {% endfor %}
+                <form action="/sentRequests/" method="post" name="sentRequests">
+                    <button style="margin-top:40px; margin-left:20px; width:200px" type="submit"
+                            class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        Refresh
+                    </button>
+                </form>
+            </div></div>
 
         <div role="tabpanel" class="tab-pane fade" id="settings" align="center">
             <button style="margin-top:60px; width:250px;" data-toggle="modal" data-target="#changePass" type="button"

@@ -1,11 +1,11 @@
-import gc, hashlib, content_management
+import gc, hashlib, content_management, time
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from passlib.hash import sha256_crypt
 from wtforms import StringField, validators, PasswordField, Form
 
 from dbconnect import connection
-from content_management import Content, searchContent, searchByID
+from content_management import Content, searchContent, searchByID, requestsByBorrower, requestsByLender, getDate
 
 app = Flask(__name__)
 app.secret_key = 'beae135cce92ebf432b043c193ccf78eb8a986f8f9febcb7f14f64ba6bc9c387'
@@ -20,6 +20,8 @@ class RegistrationForm(Form):
     facebook = StringField('FaceLink',[validators.Length(min=10,max=100)])
 
 BOOK_DETAILS= Content()
+SENT_REQUESTS = []
+INCOMING_REQUESTS = []
 
 def sumSessionCounter():
   try:
@@ -38,7 +40,7 @@ def registration():
     try:
         form = RegistrationForm(request.form)
         print "@@@"
-        if request.method == "POST":
+        if request.method == "POST" and form.validate():
             print "&&&&"
             userid = str(form.bitsid.data)
             username = str(form.name.data)
@@ -124,7 +126,7 @@ def dashboard():
             bookID = hashlib.sha1(str(bookname+userID).encode("UTF-8")).hexdigest()[:20]
 
             c, conn = connection()
-            x = c.execute("SELECT * FROM bookdetails WHERE bookID= %s", (bookID,))
+            x = c.execute("SELECT * FROM bookdetails WHERE bookID = %s", (bookID,))
             if int(x < 1):
                 c.execute("INSERT INTO bookdetails VALUES ( %s, %s, %s, %s, %s, %s)",
                       ((bookID), (bookname), (author), (edition), (int)(avlstatus), (userID)))
@@ -162,6 +164,46 @@ def booksShared():
     if request.method == "POST":
         BOOK_DETAILS=searchByID(session['userID'])
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
+
+@app.route('/sendRequest/', methods=['POST'])
+def sendRequest():
+    if request.method == "POST":
+        lenderID = request.form['lenderID']
+        bookID = request.form['bookID']
+        #startDate = request.form['startDate']
+        #endDate = request.form['endDate']
+        startDate = '2008-7-04'
+        endDate = '2009-7-04'
+        borrowerID = str(session['userID'])
+        requestID = lenderID+bookID+borrowerID
+        approvalStatus = 0
+
+        c, conn = connection()
+        x = c.execute("SELECT * FROM requests WHERE requestID = %s", (requestID,))
+        if int(x < 1):
+            c.execute("INSERT INTO requests VALUES ( %s, %s, %s, %s, %s, %s)",
+                      ((startDate), (endDate), (int)(approvalStatus), (requestID), (lenderID), (borrowerID)))
+            print("inserted")
+            conn.commit()
+            c.close()
+            conn.close()
+            gc.collect()
+        else:
+            print("duplicate entry")
+            # add flash message or something here
+    return render_template("dashboard.html", Book_details=BOOK_DETAILS)
+
+@app.route('/incomingRequests/', methods=['POST'])
+def incomingRequests():
+    if request.method == "POST":
+        INCOMING_REQUESTS = requestsByLender(session['userID'])
+        return render_template("dashboard.html", Requests=INCOMING_REQUESTS)
+
+@app.route('/sentRequests/', methods=['POST'])
+def sentRequests():
+    if request.method == "POST":
+        SENT_REQUESTS = requestsByBorrower(session['userID'])
+        return render_template("dashboard.html", Requests=SENT_REQUESTS)
 
 if __name__=='__main__':
       app.run(host='0.0.0.0', port=4141, debug=True, threaded=True)
