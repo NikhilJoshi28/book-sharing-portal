@@ -168,6 +168,7 @@ def booksShared():
         BOOKS_SHARED=searchByID(session['userID'])
     return render_template("dashboard.html", Books_shared=BOOKS_SHARED)
 
+"""
 @app.route('/changepassword/', methods = ['POST'] )
 def changepassword():
     try:
@@ -186,7 +187,7 @@ def changepassword():
                 for row in data:
                     print oldPassword,row[0]
                     if sha256_crypt.verify(oldPassword,row[0]):
-                        c.execute("UPDATE users SET uid = %s WHERE uid = %s",((str(sha256_crypt.encrypt(newPassword))),oldPassword))
+                        c.execute("UPDATE users SET password = %s WHERE uid = %s",((str(sha256_crypt.encrypt(newPassword))),oldPassword))
                         conn.commit()
                         print "password changed"
 
@@ -203,7 +204,7 @@ def changepassword():
             print e
             print "AAAAAAa"
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
-
+"""
 
 @app.route('/sendRequest/', methods=['POST'])
 def sendRequest():
