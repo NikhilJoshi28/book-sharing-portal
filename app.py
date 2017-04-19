@@ -170,11 +170,11 @@ def booksShared():
 
 @app.route('/changePassword/', methods = ['POST'] )
 def changePassword():
-    print "*************************"
+    #print "*************************"
     try:
-        print 35465
+        #print 35465
         if request.method == "POST":
-            print 11111
+            #print 11111
             oldPassword = request.form['oldpass']
             newPassword = request.form['newpass']
             confirmPassword = request.form['confpass']
@@ -208,6 +208,40 @@ def changePassword():
             print e
             print "AAAAAAa"
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
+
+@app.route('/updatedetails/',methods=['POST'])
+def updatedetails():
+    try:
+        if request.method == "POST":
+            newname = request.form['newname']
+            newphno = request.form['newphno']
+            newroomno = request.form['newroomno']
+            fbdata = request.form['fbdata']
+            passw = request.form['passw']
+
+            userID = str(session['userID'])
+            print userID
+
+            c, conn = connection()
+            c.execute("SELECT password FROM users WHERE uid= %s", (userID,))
+            data = c.fetchall()
+            for row in data:
+                print passw, row[0]
+                if (passw == row[0]):
+                    c.execute("UPDATE userdetailes SET username = %s WHERE uid = %s",(newname,userID))
+                    c.execute("UPDATE userdetailes SET phoneno = %s WHERE uid = %s",(newphno,userID))
+                    c.execute("UPDATE userdetailes SET roomno = %s WHERE uid = %s",(newroomno,userID))
+                    c.execute("UPDATE userdetailes SET facebookid = %s WHERE uid = %s",(fbdata,userID))
+                    conn.commit()
+                    print "Detailes Updated"
+
+                else:
+                    print "Enter Correct password"
+
+    except Exception as e:
+        print 1111
+        print e
+    return render_template("dashboard.html",Book_details=BOOK_DETAILS)
 
 @app.route('/sendRequest/', methods=['POST'])
 def sendRequest():

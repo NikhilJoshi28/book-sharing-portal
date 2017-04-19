@@ -331,7 +331,7 @@
                             <div class="modal-body">
                                 <div class="input-group">
                                     <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon21">Old Password</span>
-                                    <input style="width:400px" type="text" class="form-control" placeholder="old password" name="oldpass"
+                                    <input style="width:400px" type="password" class="form-control" placeholder="old password" name="oldpass"
                                                value="{{request.form.oldpass}}" aria-describedby="sizing-addon2">
                                 </div>
                                 <label></label>
@@ -368,51 +368,54 @@
 
             <div class="modal fade" id="changedetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header" align="center">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Update Detailes</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Name *</span>
-                                <input style="width:400px" type="text" class="form-control" placeholder="Name"
-                                       aria-describedby="sizing-addon2">
+                    <form name="updatedetailsModal" action="/updatedetails/" method="post">
+                        <div class="modal-content">
+                            <div class="modal-header" align="center">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Update Detailes</h4>
                             </div>
-                            <label></label>
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Phone Number *</span>
-                                <input style="width:400px" type="text" class="form-control" placeholder="Phone No."
-                                       aria-describedby="sizing-addon2">
-                            </div>
-                            <label></label>
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Room Number *</span>
-                                <input style="width:400px" type="text" class="form-control" placeholder="Room No."
-                                       aria-describedby="sizing-addon2">
-                            </div>
-                            <label></label>
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Facebook id*</span>
-                                <input style="width:400px" type="text" class="form-control"
-                                       placeholder="FB id (optional)" aria-describedby="sizing-addon2">
-                            </div>
-                            <label></label>
-                            <div class="input-group">
-                                <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Password</span>
-                                <input style="width:400px" type="text" class="form-control" placeholder="Password"
-                                       aria-describedby="sizing-addon2">
-                            </div>
-                        </div>
-                        <a href="">
-                            <div class="modal-footer">
-                                <div align="center">
-                                    <button type="button" class="btn btn-primary">Update</button>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon29">Name *</span>
+                                    <input style="width:400px" type="text" class="form-control" placeholder="Name" name="newname"
+                                               value="{{request.form.newname}}" aria-describedby="sizing-addon2">
+                                </div>
+                                <label></label>
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon299">Phone Number *</span>
+                                    <input style="width:400px" type="text" class="form-control" placeholder="Phone No." name="newphno"
+                                               value="{{request.form.newphno}}"
+                                           aria-describedby="sizing-addon2">
+                                </div>
+                                <label></label>
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon20">Room Number *</span>
+                                    <input style="width:400px" type="text" class="form-control" placeholder="Room No." name="newroomno"
+                                               value="{{request.form.newroomno}}"
+                                           aria-describedby="sizing-addon2">
+                                </div>
+                                <label></label>
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon28">Facebook id*</span>
+                                    <input style="width:400px" type="text" class="form-control" placeholder="FB id (optional)" name="fbdata"
+                                               value="{{request.form.fbdata}}" aria-describedby="sizing-addon2">
+                                </div>
+                                <label></label>
+                                <div class="input-group">
+                                    <span style="float:center; width:150px" class="input-group-addon" id="sizing-addon2">Password</span>
+                                    <input style="width:400px" type="password" class="form-control" placeholder="Password" name="passw"
+                                               value="{{request.form.passw}}"
+                                           aria-describedby="sizing-addon2">
                                 </div>
                             </div>
-                        </a>
-                    </div>
+                            <div class="modal-footer">
+                                <div align="center">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
