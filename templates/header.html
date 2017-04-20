@@ -13,18 +13,24 @@
 </head>
 <header>
      <div class="navbar-header">
-         <a class="navbar-brand" href="/">
+         <a class="navbar-brand" href="/dashboard/">
               <img style="max-width:120px; margin-top:-7px;" src="{{ url_for('static',filename='Images/Logo2.jpeg') }}">
          </a>
      </div>
 
     <ul class="nav navbar-nav navbar-right">
         <!-- Button trigger modal -->
-        <a href="/">
-            <form action="/logout/" method="post" >
-                <button style="margin-top:20px; margin-right:40px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+        <a href="/index/">
+            <button style="margin-top:20px; margin-right:10em" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                Logout
+            </button>
+        </a>
+        <a href="/generateReport/">
+            <form method="post" action="/generateReport/">
+                <button style="margin-top:20px;" type="submit" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                    Logout
+                    Generate Report
                 </button>
             </form>
         </a>

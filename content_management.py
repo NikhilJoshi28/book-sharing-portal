@@ -61,14 +61,14 @@ def requestsByBorrower(id):
     return execute_id(sqlQ)
 
 def approveR(id):
-    sqlQ = "update requests set approvalStatus = 1 where requestID = '" + str(id) + "'"
+    sqlQ = "update requests set approvalStatus = 1 where requestID='" + str(id) + "'"
     c.execute(sqlQ)
-    print "executed"
     conn.commit()
     gc.collect()
 
-def getUserSQL(id):
-    sqlQ = ""
+def getUserSQL(userID):
+    sqlQ = "select * from userdetailes where uid = '" + str(userID) + "'"
+    print executeUser_id(sqlQ)
     return executeUser_id(sqlQ)
 
 def getDate():

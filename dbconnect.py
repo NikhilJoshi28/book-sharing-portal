@@ -6,5 +6,5 @@ def connection():
                            passwd = "mysqlpass",
                            db = "booksharing")
     c = conn.cursor()
-    print('MySQL database connected')
+    #print('MySQL database connected')
     return c, conn
