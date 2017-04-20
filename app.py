@@ -32,8 +32,11 @@ def sumSessionCounter():
 
 @app.route('/')
 def index():
-    return render_template("main.html")
+    return render_template("index.html")
 
+@app.route('/index/')
+def index1():
+    return render_template("index.html")
 
 @app.route('/register/', methods=["GET","POST"])
 def registration():
