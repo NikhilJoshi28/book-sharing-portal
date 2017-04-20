@@ -1,0 +1,28 @@
+{% extends "header.html" %}
+{% block body %}
+
+{% for detail in Details %}
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View Contact Details</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">User</h4>
+            </div>
+            <div class="modal-body">
+                <label>User ID : </label>&ensp;&ensp;<p>detail[0]</p>
+                <label>User Name : </label>&ensp;&ensp;<p>detail[1]</p>
+                <label>Phone number : </label>&ensp;&ensp;<p>detail[2]</p>
+                <label>Room number : </label>&ensp;&ensp;<p>detail[3]</p>
+                <label>Facebook Link : </label>&ensp;&ensp;<p>detail[4]</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

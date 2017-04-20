@@ -33,3 +33,48 @@
                     <a href="/admin/userA" class="btn btn-danger"><span class="glyphicon glyphicon-info-sign"></span> Unavailable </a>
                     {% endif %}-->
                 </span>
+
+                             <!--{% set requestID = request[3] %}-->
+
+
+{% for irequest in iRequests %}
+                <ul class="list-group">
+                    <li class="list-group-item clearfix">
+                        <form method="post" action="/approve/">
+                        <h4 class="list-group-item-heading">{{irequest[6] }}</h4>
+                        <span class="label label-success">{{ irequest[0] }} </span>&ensp;
+                        <span class="label label-danger">{{ irequest[1] }} </span>&ensp;
+                        {% if irequest[2] == 0 %}
+                        <input style="display:none" aria-describedby="sizing-addon2" name="requestID" value="{{request[3]}}">&ensp;
+                        &ensp;<button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-info-sign"></span> Approve </button>&ensp;
+                        {% else %}
+                        &ensp;<span class="btn btn-success pull-right"><span class="glyphicon glyphicon-info-sign"></span> Approved </span>&ensp;
+                        {% endif %}
+                       <span class="pull-right label-success"
+                              style="font-size:120%; padding:0.3em; border-radius: 3%; background-color:#c6538c; color:white"> &ensp;{{ irequest[5] }} &ensp;</span>&ensp;
+                        </form>
+                    </li>
+                </ul>
+                {% endfor %}
+
+
+
+{% for irequest in iRequests %}
+                <ul class="list-group">
+                    <li class="list-group-item clearfix">
+                        <form method="post" action="/approve/">
+                        <h4 class="list-group-item-heading">{{irequest[6] }}</h4>
+                        <span class="label label-success">{{ irequest[0] }} </span>&ensp;
+                        <span class="label label-danger">{{ irequest[1] }} </span>&ensp;
+                        {% if irequest[2] == 0 %}
+                        <input style="display:block" aria-describedby="sizing-addon2" name="requestID" value=" {{ request[3] }} ">&ensp;
+                        &ensp;<button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-info-sign"></span> Approve </button>&ensp;
+                        {% else %}
+                        &ensp;<span class="btn btn-success pull-right"><span class="glyphicon glyphicon-info-sign"></span> Approved </span>&ensp;
+                        {% endif %}
+                       <span class="pull-right label-success"
+                              style="font-size:120%; padding:0.3em; border-radius: 3%; background-color:#c6538c; color:white"> &ensp;{{ irequest[5] }} &ensp;</span>&ensp;
+                        </form>
+                    </li>
+                </ul>
+                {% endfor %}

@@ -21,10 +21,12 @@
     <ul class="nav navbar-nav navbar-right">
         <!-- Button trigger modal -->
         <a href="/">
-            <button style="margin-top:20px; margin-right:40px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
-                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                Logout
-            </button>
+            <form action="/logout/" method="post" >
+                <button style="margin-top:20px; margin-right:40px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    Logout
+                </button>
+            </form>
         </a>
     </ul>
 
