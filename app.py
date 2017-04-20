@@ -114,7 +114,7 @@ def login():
                     message = "user does not exist"
                     print "user does not exist"
 
-            return render_template("main.html")
+            return render_template("index.html")
 
         except Exception as e:
             print e
