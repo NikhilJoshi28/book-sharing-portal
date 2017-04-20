@@ -40,12 +40,12 @@ def index1():
 
 @app.route('/register/', methods=["GET","POST"])
 def registration():
-    print "###"
+   # print "###"
     try:
         form = RegistrationForm(request.form)
-        print "@@@"
+   #     print "@@@"
         if request.method == "POST" :
-            print "&&&&"
+   #         print "&&&&"
             userid = str(form.bitsid.data)
             username = str(form.name.data)
             #password = str(sha256_crypt.encrypt((str(form.password.data))))
@@ -54,36 +54,36 @@ def registration():
             roomno = str(form.roomno.data)
             facebookid = str(form.facebook.data)
             c, conn = connection()
-            print userid
+  #          print userid
 
             x = c.execute("SELECT * FROM users WHERE uid= %s",(userid,))
-            print x
+  #          print x
 
             if int(x) > 0:
-                print "Username Already taken"
+  #              print "Username Already taken"
                 return render_template('register.html', form=form)
             else:
                 c.execute("INSERT INTO users VALUES ( %s, %s)", ((userid),(password)))
                 c.execute("INSERT INTO userdetailes VALUES ( %s, %s, %s, %s, %s)",((userid),(username),(phoneno),(roomno),(facebookid)))
                 conn.commit()
-                print "data added"
+  #              print "data added"
                 c.close()
                 conn.close()
                 gc.collect()
 
                 session['logged_in'] = True
                 session['userID'] = userid
-                print session['userID'] +" " + "this is in register"
+  #              print session['userID'] +" " + "this is in register"
                 return redirect(url_for('confirmation'))
 
         else:
-            print "555"
+            print ""
 
         return render_template("register.html", form=form)
 
     except Exception as e:
-        print "****"
-        print e
+         print ""
+  #      print e
 
 @app.route('/login/', methods=['GET','POST'])
 def login():
@@ -93,8 +93,8 @@ def login():
                 attempted_password = request.form['password']
                 #passEnc = str(sha256_crypt.encrypt((str(attempted_password))))
                 passEnc = str(attempted_password)
-                print attempted_password
-                print attempted_username
+  #              print attempted_password
+  #              print attempted_username
 
                 c, conn = connection()
                 x = c.execute("SELECT * FROM users WHERE uid= %s", (attempted_username,))
@@ -102,22 +102,23 @@ def login():
                     c.execute("SELECT password FROM users WHERE uid= %s", (attempted_username,))
                     data = c.fetchall()
                     for row in data:
-                        print row[0], passEnc
+ #                       print row[0], passEnc
                         if attempted_password == row[0]:
                             session['logged_in'] = True
                             session['userID'] = attempted_username
                             return redirect(url_for('dashboard'))
                     else:
                         message = "invalid credentials"
-                        print "invalid credentials"
+  #                      print "invalid credentials"
                 else:
                     message = "user does not exist"
-                    print "user does not exist"
+  #                  print "user does not exist"
 
             return render_template("index.html")
 
         except Exception as e:
-            print e
+  #          print e
+             print ""
         return render_template("main.html")
 
 @app.route('/dashboard/', methods=['GET','POST'])
@@ -141,13 +142,15 @@ def dashboard():
                 conn.close()
                 gc.collect()
             else:
-                print("duplicate entry")
+                print ""
+    #            print("duplicate entry")
                 #add flash message or something here
 
         return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
     except Exception as e:
-        print e
+    #    print e
+         print ""
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
 @app.route('/confirmation/')
@@ -182,34 +185,36 @@ def changePassword():
             newPassword = request.form['newpass']
             confirmPassword = request.form['confpass']
 
-            print oldPassword, newPassword, confirmPassword
+    #        print oldPassword, newPassword, confirmPassword
             userID = str(session['userID'])
-            print userID
+    #        print userID
 
             c, conn = connection()
             c.execute("SELECT password FROM users WHERE uid= %s", (userID,))
             data = c.fetchall()
             if newPassword==confirmPassword:
-                print("okay")
+    #            print("okay")
                 for row in data:
-                    print oldPassword,row[0]
+    #                print oldPassword,row[0]
                     if (oldPassword == row[0]):
                         c.execute("UPDATE users SET password = %s WHERE uid = %s",((str(newPassword),userID)))
                         conn.commit()
-                        print "password changed"
+    #                    print "password changed"
 
                     else:
-                        print "Old Password not same"
+    #                    print "Old Password not same"
+                         print ""
             else:
-                print "Password Doesnt Match"
+    #            print "Password Doesnt Match"
+                print ""
 
             c.close()
             conn.close()
             gc.collect()
 
     except Exception as e:
-            print e
-            print "AAAAAAa"
+    #        print e
+            print ""
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
 @app.route('/updatedetails/',methods=['POST'])
@@ -223,27 +228,28 @@ def updatedetails():
             passw = request.form['passw']
 
             userID = str(session['userID'])
-            print userID
+    #        print userID
 
             c, conn = connection()
             c.execute("SELECT password FROM users WHERE uid= %s", (userID,))
             data = c.fetchall()
             for row in data:
-                print passw, row[0]
+    #            print passw, row[0]
                 if (passw == row[0]):
                     c.execute("UPDATE userdetailes SET username = %s WHERE uid = %s",(newname,userID))
                     c.execute("UPDATE userdetailes SET phoneno = %s WHERE uid = %s",(newphno,userID))
                     c.execute("UPDATE userdetailes SET roomno = %s WHERE uid = %s",(newroomno,userID))
                     c.execute("UPDATE userdetailes SET facebookid = %s WHERE uid = %s",(fbdata,userID))
                     conn.commit()
-                    print "Detailes Updated"
+    #                print "Detailes Updated"
 
                 else:
-                    print "Enter Correct password"
+    #                print "Enter Correct password"
+                    print ""
 
     except Exception as e:
-        print 1111
-        print e
+        print ""
+    #    print e
     return render_template("dashboard.html",Book_details=BOOK_DETAILS)
 
 @app.route('/sendRequest/', methods=['POST'])
@@ -264,13 +270,14 @@ def sendRequest():
         if int(x < 1):
             c.execute("INSERT INTO requests VALUES ( %s, %s, %s, %s, %s, %s)",
                       ((startDate), (endDate), (int)(approvalStatus), (requestID), (lenderID), (borrowerID)))
-            print("inserted")
+    #        print("inserted")
             conn.commit()
             c.close()
             conn.close()
             gc.collect()
         else:
-            print("duplicate entry")
+    #        print("duplicate entry")
+            print ""
             # add flash message or something here
     return render_template("dashboard.html", Book_details=BOOK_DETAILS)
 
@@ -285,6 +292,27 @@ def sentRequests():
     if request.method == "POST":
         SENT_REQUESTS = requestsByBorrower(session['userID'])
         return render_template("dashboard.html", Requests=SENT_REQUESTS)
+
+@app.route('/generateReport/',methods=['POST'])
+def genreport():
+    if request.method == "POST":
+        c,conn = connection()
+        x = c.execute("SELECT * FROM users")
+        y = c.execute("SELECT * FROM requests")
+        z =c.execute("SELECT * FROM bookdetails")
+
+
+        c.close()
+        conn.close()
+        print "Total No of users " + str(x)
+        print "Total No of requests " + str(y)
+        print "Total No of share books " + str(z)
+
+    else:
+        print "***"
+
+    return render_template("dashboard.html")
+        
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=4142, debug=True, threaded=True)

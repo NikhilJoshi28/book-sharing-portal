@@ -21,10 +21,18 @@
     <ul class="nav navbar-nav navbar-right">
         <!-- Button trigger modal -->
         <a href="/index/">
-            <button style="margin-top:20px; margin-right:40px" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+            <button style="margin-top:20px; margin-right:10em" type="button" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                 Logout
             </button>
+        </a>
+        <a href="/generateReport/">
+            <form method="post" action="/generateReport/">
+                <button style="margin-top:20px;" type="submit" class="btn btn-danger" data-toggle="modal" data-target="#LoginModal">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    Generate Report
+                </button>
+            </form>
         </a>
     </ul>
 
