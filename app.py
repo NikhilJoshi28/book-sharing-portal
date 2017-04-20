@@ -1,4 +1,5 @@
 import gc, hashlib, content_management, time
+import datetime
 
 from flask import Flask, render_template, request, url_for, redirect, session
 from passlib.hash import sha256_crypt
@@ -93,8 +94,8 @@ def login():
                 attempted_password = request.form['password']
                 #passEnc = str(sha256_crypt.encrypt((str(attempted_password))))
                 passEnc = str(attempted_password)
-  #              print attempted_password
-  #              print attempted_username
+                print ">>>User: "+ str(attempted_username) + "Logged in at: " + str(datetime.datetime.now())
+
 
                 c, conn = connection()
                 x = c.execute("SELECT * FROM users WHERE uid= %s", (attempted_username,))
@@ -199,7 +200,7 @@ def changePassword():
                     if (oldPassword == row[0]):
                         c.execute("UPDATE users SET password = %s WHERE uid = %s",((str(newPassword),userID)))
                         conn.commit()
-    #                    print "password changed"
+                        print ">>>User"+str(userID)+"Changed password at: "+str(datetime.datetime.now())
 
                     else:
     #                    print "Old Password not same"
@@ -241,11 +242,10 @@ def updatedetails():
                     c.execute("UPDATE userdetailes SET roomno = %s WHERE uid = %s",(newroomno,userID))
                     c.execute("UPDATE userdetailes SET facebookid = %s WHERE uid = %s",(fbdata,userID))
                     conn.commit()
-    #                print "Detailes Updated"
+                    print ">>>User: "+str(userID)+" Updated Detailes at: "+str(datetime.datetime.now())
 
                 else:
-    #                print "Enter Correct password"
-                    print ""
+                    print ">>>User: "+str(userID)+" entered wronge password at: "+str(datetime.datetime.now())
 
     except Exception as e:
         print ""
@@ -270,7 +270,7 @@ def sendRequest():
         if int(x < 1):
             c.execute("INSERT INTO requests VALUES ( %s, %s, %s, %s, %s, %s)",
                       ((startDate), (endDate), (int)(approvalStatus), (requestID), (lenderID), (borrowerID)))
-    #        print("inserted")
+            print " User: "+str(borrowerID)+" requested for book at: "+str(datetime.datetime.now())
             conn.commit()
             c.close()
             conn.close()
@@ -299,14 +299,16 @@ def genreport():
         c,conn = connection()
         x = c.execute("SELECT * FROM users")
         y = c.execute("SELECT * FROM requests")
-        z =c.execute("SELECT * FROM bookdetails")
-
+        z = c.execute("SELECT * FROM bookdetails")
+        userId = str(session['userID'])
 
         c.close()
         conn.close()
-        print "Total No of users " + str(x)
-        print "Total No of requests " + str(y)
-        print "Total No of share books " + str(z)
+        print ""
+        print ">>>Total No of users " + str(x)
+        print ">>>Total No of requests " + str(y)
+        print ">>>Total No of share books " + str(z)
+        print "User: "+userId+" Generated Report at: "+str(datetime.datetime.now())
 
     else:
         print "***"
