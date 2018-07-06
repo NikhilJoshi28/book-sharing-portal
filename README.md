@@ -27,15 +27,15 @@ pip3 install passlib
 
 ## Running the test
 
-*change data_file path
+* change data_file path
 
-*refer/change dbconnect.py to connect database giving user and password
+* refer/change dbconnect.py to connect database giving user and password
 
-*run  
+* run  
 ```
 python3 app.py
 ```
-*open web-browser
+* open web-browser
 ```
 127.0.0.1:4141
 ```
