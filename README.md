@@ -25,12 +25,6 @@ sudo apt-get install mysql-server
 pip3 install passlib
 ```
 
-### Dataset
-
-* [Human DNA database]()
-
-dataset in festa form with 311 datapoints each datapoint consist name and DNA sequence
-
 ## Running the test
 
 #change data_file path
